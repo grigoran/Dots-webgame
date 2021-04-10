@@ -1,13 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/normalize.css" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
+    <header class="header">
+      <img src="#" alt="logo" class="logo" />
+      <div class="lobbyName"></div>
+    </header>
+    <div class="welcome-popup welcome-popup_shown">
+      <form class="welcome-popup__form">
+        <input class="nickname-field" type="text" name="nickname" />
+        <ul class="color-picker">
+          <li class="color-picker__underline"></li>
+          <li class="color-picker__item">
+            <input
+              type="radio"
+              name="color"
+              value="red"
+              class="color-picker__button"
+              checked
+            />
+          </li>
+          <li class="color-picker__item">
+            <input
+              type="radio"
+              name="color"
+              value="green"
+              class="color-picker__button"
+            />
+          </li>
+          <li class="color-picker__item">
+            <input
+              type="radio"
+              name="color"
+              value="blue"
+              class="color-picker__button"
+            />
+          </li>
+          <li class="color-picker__item">
+            <input
+              type="radio"
+              name="color"
+              value="pink"
+              class="color-picker__button"
+            />
+          </li>
+          <li class="color-picker__item">
+            <input
+              type="radio"
+              name="color"
+              value="purple"
+              class="color-picker__button"
+            />
+          </li>
+        </ul>
+        <input type="submit" name="submit" value="Играть"/>
+      </form>
+    </div>
     <canvas class="canvas">update browser</canvas>
     <script src="/js/canvas.js"></script>
-</body>
+  </body>
 </html>

@@ -1,0 +1,1 @@
+//document.querySelector(".welcome-popup").classList.toggle("welcome-popup_hiden")
