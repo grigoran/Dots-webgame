@@ -38,8 +38,10 @@
   width: 32px;
   height: 32px;
   outline: none;
-
-  transition: 150ms ease-in;
+  border: solid orange;
+  border-width: 0px;
+  
+  transition: 125ms ease;
 }
 
 .color-picker__button[value="red"] {
@@ -64,12 +66,9 @@
 
 .color-picker__button:checked {
   border-radius: 30%;
+  border-width: 4px;
 }
 
-.color-picker__underline{
-    position: absolute;
-    width: 32px;
-    height: 32px;
-    border-bottom: 4px solid black;
-    z-index: -1;
+.color-picker__button:hover {
+    border-radius: 30%;
 }
