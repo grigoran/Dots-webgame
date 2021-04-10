@@ -6,23 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
     <title>Document</title>
   </head>
   <body>
     <header class="header">
-      <img src="#" alt="logo" class="logo" />
-      <div class="lobbyName"></div>
+      <img src="#" alt="logo" class="header__logo" />
+      <p class="header__lobby-name"></p>
     </header>
     <div class="welcome-popup">
+      <h3 class="welcome-popup__title">Приглашение</h3>
       <form class="welcome-popup__form">
-        <input class="nickname-field" type="text" name="nickname" />
+        <div class="welcome-popup__nickname-section">
+          <label class="welcome-popup__nickname-label">
+            Твое имя:
+            <input
+              class="welcome-popup__nickname-field"
+              type="text"
+              name="nickname"
+              placeholder="Лучший"
+              autocomplete="off"
+            />
+          </label>
+        </div>
         <ul class="color-picker">
           <li class="color-picker__item">
             <input
               type="radio"
               name="color"
               value="red"
-              class="color-picker__button"
+              class="color-picker__button color-picker__button_picked"
               checked
             />
           </li>
@@ -59,7 +72,12 @@
             />
           </li>
         </ul>
-        <input type="submit" name="submit" value="Играть"/>
+        <input
+          class="welcome-popup__submit"
+          type="submit"
+          name="submit"
+          value="Играть"
+        />
       </form>
     </div>
     <canvas class="canvas">update browser</canvas>

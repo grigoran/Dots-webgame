@@ -1,34 +1,81 @@
-.welcome-popup{
-    position: absolute;
-    max-width: 500px;
-    left: 50%;
-    top: 20%;
-
-    transition: 125ms ease-in;
-    transform: translate(-50%, -50%);
-
-    background-color: rgb(48, 146, 211);
-    border-radius: 10%;
-    opacity: 0;
+body {
+  color: whitesmoke;
+  background-color: rgb(28, 27, 37);
+  font-family: "Roboto";
 }
 
-.welcome-popup_shown{
-    top: 50%;
-    opacity: 100;
+.welcome-popup {
+  position: absolute;
+  max-width: 300px;
+  width: 100%;
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+
+  transition: 125ms ease-in;
+  background-color: rgb(37, 46, 51);
+  border-radius: 20px;
+  opacity: 0;
 }
 
-.welcome-popup__form{
-    display: flex;
-    flex-direction: column;
+.welcome-popup_shown {
+  top: 40%;
+  opacity: 100;
 }
 
-.color-picker{
-    width: 200px;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    list-style: none;
+.welcome-popup_hidden {
+  display: none;
+}
+
+.welcome-popup__title {
+  margin-top: 0;
+  text-align: center;
+}
+
+.welcome-popup__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome-popup__nickname-section {
+  width: 100%;
+}
+
+.welcome-popup__nickname-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 14pt;
+}
+.welcome-popup__nickname-field {
+  max-width: 200px;
+  border: none;
+  border-radius: 5px;
+  padding-left: 10px;
+  box-sizing: border-box;
+
+  background-color: whitesmoke;
+  font-weight: 500;
+  color: rgb(37, 46, 51);
+}
+.welcome-popup__nickname-field:enabled {
+  outline: none;
+}
+
+.color-picker {
+  width: 200px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
 }
 
 .color-picker__button {
@@ -38,37 +85,62 @@
   width: 32px;
   height: 32px;
   outline: none;
-  border: solid orange;
-  border-width: 0px;
-  
+  border: solid whitesmoke;
+  border-width: 2px;
+
   transition: 125ms ease;
 }
 
 .color-picker__button[value="red"] {
-  background-color: red;
+  background-color: rgb(238, 43, 43);
 }
 
 .color-picker__button[value="green"] {
-  background-color: green;
+  background-color: rgb(11, 184, 112);
 }
 
 .color-picker__button[value="blue"] {
-  background-color: blue;
+  background-color: rgb(13, 177, 241);
 }
 
 .color-picker__button[value="pink"] {
-  background-color: pink;
+  background-color: rgb(233, 166, 218);
 }
 
 .color-picker__button[value="purple"] {
-  background-color: purple;
+  background-color: rgb(131, 21, 131);
 }
 
 .color-picker__button:checked {
   border-radius: 30%;
   border-width: 4px;
+  transform: scale(1.2);
 }
 
 .color-picker__button:hover {
-    border-radius: 30%;
+  border-radius: 30%;
+}
+
+.welcome-popup__submit {
+  max-width: 100px;
+  width: 100%;
+  height: 40px;
+
+  transition: 125ms ease;
+  outline: none;
+
+  font-size: 14pt;
+  font-weight: 500;
+  color: rgb(37, 46, 51);
+  background-color: whitesmoke;
+  border: none;
+  border-radius: 5px;
+}
+
+.welcome-popup__submit:hover {
+  opacity: 50%;
+}
+
+.welcome-popup__submit:active {
+  transform: scale(0.75);
 }
