@@ -1,7 +1,18 @@
 body {
   color: whitesmoke;
-  background-color: rgb(28, 27, 37);
+  background-color: #1b1b25;
   font-family: "Roboto";
+}
+
+.header__logo {
+  height: 30px;
+}
+
+.header {
+  max-width: 1400px;
+  width: 100%;
+  margin: auto;
+  margin-top: 10px;
 }
 
 .welcome-popup {
