@@ -18,10 +18,8 @@ function welcomeFormSubmit(event) {
     localPlayerColor = welcome_popup__form.color.value;
     localPlayerNickname = welcome_popup__form.nickname.value;
     welcome_popup.classList.remove("welcome-popup_shown");
-    setTimeout(() => {
-      welcome_popup.classList.add("welcome-popup_hidden");
-      startCanvas();
-    }, 300);
+    startCanvas();
+    setTimeout(() => welcome_popup.classList.add("welcome-popup_hidden"), 300);
   }
   event.preventDefault();
 }
