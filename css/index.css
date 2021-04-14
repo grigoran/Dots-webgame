@@ -102,26 +102,6 @@ body {
   transition: 125ms ease;
 }
 
-.color-picker__button[value="red"] {
-  background-color: rgb(238, 43, 43);
-}
-
-.color-picker__button[value="green"] {
-  background-color: rgb(11, 184, 112);
-}
-
-.color-picker__button[value="blue"] {
-  background-color: rgb(13, 177, 241);
-}
-
-.color-picker__button[value="pink"] {
-  background-color: rgb(233, 166, 218);
-}
-
-.color-picker__button[value="purple"] {
-  background-color: rgb(131, 21, 131);
-}
-
 .color-picker__button:checked {
   border-radius: 30%;
   border-width: 4px;
@@ -154,4 +134,10 @@ body {
 
 .welcome-popup__submit:active {
   transform: scale(0.75);
+}
+
+.canvas {
+  display: block;
+  width: fit-content;
+  margin: auto;
 }

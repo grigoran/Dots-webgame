@@ -7,15 +7,16 @@
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/fonts.css" />
+    <script type="module" src="js/index.js"></script>
     <title>Dots</title>
   </head>
   <body>
     <header class="header">
-      <a href=""><img src="svg/logo.svg" alt="logo" class="header__logo" /></a>
+      <img src="svg/logo.svg" alt="logo" class="header__logo" />
       <p class="header__lobby-name"></p>
     </header>
     <div class="welcome-popup">
-      <h3 class="welcome-popup__title">Приглашение</h3>
+      <h3 class="welcome-popup__title">Вход в игру</h3>
       <form class="welcome-popup__form">
         <div class="welcome-popup__nickname-section">
           <label class="welcome-popup__nickname-label">
@@ -26,6 +27,7 @@
               name="nickname"
               placeholder="Лучший"
               autocomplete="off"
+              autofocus="autofocus"
             />
           </label>
         </div>
@@ -34,7 +36,7 @@
             <input
               type="radio"
               name="color"
-              value="red"
+              value="#ee2b2b"
               class="color-picker__button color-picker__button_picked"
               checked
             />
@@ -43,7 +45,7 @@
             <input
               type="radio"
               name="color"
-              value="green"
+              value="#0bb870"
               class="color-picker__button"
             />
           </li>
@@ -51,7 +53,7 @@
             <input
               type="radio"
               name="color"
-              value="blue"
+              value="#0db1f1"
               class="color-picker__button"
             />
           </li>
@@ -59,7 +61,7 @@
             <input
               type="radio"
               name="color"
-              value="pink"
+              value="#e9a6da"
               class="color-picker__button"
             />
           </li>
@@ -67,7 +69,7 @@
             <input
               type="radio"
               name="color"
-              value="purple"
+              value="#831583"
               class="color-picker__button"
             />
           </li>
@@ -80,8 +82,6 @@
         />
       </form>
     </div>
-    <canvas class="canvas">update browser</canvas>
-    <script src="js/index.js"></script>
-    <script src="js/canvas.js"></script>
+    <canvas class="canvas" width="360" height="360">update browser</canvas>
   </body>
 </html>
