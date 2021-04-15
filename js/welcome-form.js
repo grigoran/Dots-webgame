@@ -1,6 +1,6 @@
 export let localPlayerColor;
 export let localPlayerNickname;
-import { startCanvas } from "./canvas.js";
+import { startGame } from "./canvas.js";
 
 setButtonsColor();
 let welcome_popup = document.querySelector(".welcome-popup");
@@ -18,7 +18,7 @@ function welcomeFormSubmit(event) {
     localPlayerColor = welcome_popup__form.color.value;
     localPlayerNickname = welcome_popup__form.nickname.value;
     welcome_popup.classList.remove("welcome-popup_shown");
-    startCanvas();
+    startGame();
     setTimeout(() => welcome_popup.classList.add("welcome-popup_hidden"), 300);
   }
   event.preventDefault();
