@@ -32,7 +32,7 @@ export function update(ctx, deltaTime, screenWidth, screenHeight) {
     ctx.fill();
   }
   offset += speed * deltaTime;
-  if (offset >= 2 * Math.PI) {
+  if (offset >= Math.PI) {
     ctx.globalAlpha -= speed * deltaTime;
     if (ctx.globalAlpha <= 0.1) {
       loadCallback();

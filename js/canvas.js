@@ -2,6 +2,7 @@ import { update as loadingAnim, update } from "./game-loading.js";
 import { onLoad as setLoadCallback } from "./game-loading.js";
 
 export function startGame() {
+  lastTime = Date.now();
   requestAnimationFrame(gameLoop);
 }
 
