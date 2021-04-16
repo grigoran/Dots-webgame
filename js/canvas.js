@@ -17,15 +17,15 @@ setLoadCallback(() => {
   let img = new Image();
   img.src = "./img/mike.jpg";
   let opacity = 0;
-  updateFunc = function (ctx, deltaTime) {
+  updateFunc = function (ctx, deltaTime, width) {
     if (opacity <= 1) opacity += deltaTime;
     else opacity = 1;
     ctx.globalAlpha = opacity;
-    ctx.drawImage(img, 0, 0);
+    ctx.drawImage(img, width / 2 - img.width / 2, 0);
     ctx.font = "35px Roboto";
     ctx.fillStyle = "white";
     ctx.textAlign = "center";
-    ctx.fillText(localPlayerNickname, img.width / 2, img.height - 10);
+    ctx.fillText(localPlayerNickname, width / 2, img.height - 10);
   };
 });
 
