@@ -13,7 +13,16 @@ let lastTime = Date.now();
 let updateFunc = loadingAnim;
 
 setLoadCallback(() => {
-  updateFunc = function () {};
+  let img = new Image();
+  img.src = "./img/mike.jpg";
+  console.log(img);
+  let opacity = 0;
+  updateFunc = function (ctx, deltaTime) {
+    if (opacity <= 1) opacity += deltaTime;
+    else opacity = 1;
+    ctx.globalAlpha = opacity;
+    ctx.drawImage(img, 0, 0);
+  };
 });
 
 function gameLoop() {

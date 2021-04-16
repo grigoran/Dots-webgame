@@ -9,7 +9,7 @@ let totalShapeCount = 100;
 let offset = 0;
 let speed = 1;
 
-let gameReady = false;
+let nowAlpha = 1;
 
 let loadCallback = function () {};
 
@@ -33,11 +33,13 @@ export function update(ctx, deltaTime, screenWidth, screenHeight) {
   }
   offset += speed * deltaTime;
   if (offset >= Math.PI) {
-    ctx.globalAlpha -= speed * deltaTime;
-    if (ctx.globalAlpha <= 0) {
-      loadCallback();
-      ctx.globalAlpha = 1;
+    if (nowAlpha > 0) nowAlpha -= speed * deltaTime;
+    nowAlpha < 0 ? (ctx.globalAlpha = 0) : (ctx.globalAlpha = nowAlpha);
+    if (nowAlpha <= 0) {
+      setTimeout(() => {
+        loadCallback();
+        ctx.globalAlpha = 1;
+      }, 200);
     }
   }
-  if (gameReady) loadCallback();
 }
