@@ -17,6 +17,8 @@ function welcomeFormSubmit(event) {
   if (welcome_popup.classList.contains("welcome-popup_shown")) {
     localPlayerColor = welcome_popup__form.color.value;
     localPlayerNickname = welcome_popup__form.nickname.value;
+    if (localPlayerNickname == "")
+      localPlayerNickname = welcome_popup__form.nickname.placeholder;
     welcome_popup.classList.remove("welcome-popup_shown");
     startGame();
     setTimeout(() => welcome_popup.classList.add("welcome-popup_hidden"), 300);

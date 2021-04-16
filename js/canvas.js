@@ -1,5 +1,6 @@
 import { update as loadingAnim, update } from "./game-loading.js";
 import { onLoad as setLoadCallback } from "./game-loading.js";
+import { localPlayerNickname } from "./welcome-form.js";
 
 export function startGame() {
   lastTime = Date.now();
@@ -15,13 +16,16 @@ let updateFunc = loadingAnim;
 setLoadCallback(() => {
   let img = new Image();
   img.src = "./img/mike.jpg";
-  console.log(img);
   let opacity = 0;
   updateFunc = function (ctx, deltaTime) {
     if (opacity <= 1) opacity += deltaTime;
     else opacity = 1;
     ctx.globalAlpha = opacity;
     ctx.drawImage(img, 0, 0);
+    ctx.font = "35px Roboto";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center";
+    ctx.fillText(localPlayerNickname, img.width / 2, img.height - 10);
   };
 });
 
