@@ -1,7 +1,7 @@
 import { Stage } from "./stage.js";
 
-import { localPlayerColor } from "./welcome-form.js";
-import { canvas, ctx } from "./init-canvas.js";
+import { localPlayerColor } from "../../welcome-form.js";
+import { canvas, ctx } from "../init-canvas.js";
 
 export class GameLoading extends Stage {
   #screenWidth = canvas.width;
@@ -38,10 +38,8 @@ export class GameLoading extends Stage {
         ? (ctx.globalAlpha = 0)
         : (ctx.globalAlpha = this.#nowAlpha);
       if (this.#nowAlpha <= 0) {
-        setTimeout(() => {
-          this.onComplete();
-          ctx.globalAlpha = 1;
-        }, 200);
+        this.onComplete();
+        ctx.globalAlpha = 1;
       }
     }
   }

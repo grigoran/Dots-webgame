@@ -1,8 +1,8 @@
 import { canvas, ctx } from "./init-canvas.js";
-import { Stage } from "./stage.js";
 
-import { GameLoading } from "./game-loading.js";
-import { MemAppear } from "./mem-appear.js";
+import { Stage } from "./stages/stage.js";
+import { GameLoading } from "./stages/game-loading.js";
+import { MemAppear } from "./stages/mem-appear.js";
 
 export function startGame() {
   lastTime = Date.now();
@@ -17,9 +17,11 @@ Stage.prototype.onComplete = () => {
 //init game stages
 let gameLoadStage = new GameLoading();
 let memAppearStage = new MemAppear();
+let clearStage = new Stage();
 
 //game stages dependences
 gameLoadStage.setNext(memAppearStage);
+memAppearStage.setNext(clearStage);
 
 let currentStage = gameLoadStage;
 

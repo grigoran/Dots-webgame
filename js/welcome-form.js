@@ -1,6 +1,6 @@
 export let localPlayerColor;
 export let localPlayerNickname;
-import { startGame } from "./canvas.js";
+import { startGame } from "./canvas/canvas.js";
 
 setButtonsColor();
 let welcome_popup = document.querySelector(".welcome-popup");

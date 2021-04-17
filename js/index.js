@@ -1,1 +1,1 @@
-import "./canvas.js";
+import "./welcome-form.js";
