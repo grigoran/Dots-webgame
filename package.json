@@ -1,0 +1,23 @@
+{
+  "name": "dotsweb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grigoran/Dots-webgame.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grigoran/Dots-webgame/issues"
+  },
+  "homepage": "https://github.com/grigoran/Dots-webgame#readme",
+  "devDependencies": {
+    "webpack": "^5.33.2",
+    "webpack-cli": "^4.6.0"
+  }
+}
