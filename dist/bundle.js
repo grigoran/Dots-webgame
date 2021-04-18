@@ -30,16 +30,6 @@ eval("\n\nmodule.exports = function (url, options) {\n  if (!options) {\n    // 
 
 /***/ }),
 
-/***/ "./node_modules/html-loader/dist/runtime/getUrl.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/html-loader/dist/runtime/getUrl.js ***!
-  \*********************************************************/
-/***/ ((module) => {
-
-eval("\n\nmodule.exports = function (url, options) {\n  if (!options) {\n    // eslint-disable-next-line no-param-reassign\n    options = {};\n  }\n\n  if (!url) {\n    return url;\n  } // eslint-disable-next-line no-underscore-dangle, no-param-reassign\n\n\n  url = String(url.__esModule ? url.default : url);\n\n  if (options.hash) {\n    // eslint-disable-next-line no-param-reassign\n    url += options.hash;\n  }\n\n  if (options.maybeNeedQuotes && /[\\t\\n\\f\\r \"'=<>`]/.test(url)) {\n    return \"\\\"\".concat(url, \"\\\"\");\n  }\n\n  return url;\n};\n\n//# sourceURL=webpack://dotsweb/./node_modules/html-loader/dist/runtime/getUrl.js?");
-
-/***/ }),
-
 /***/ "./src/js/canvas/canvas.js":
 /*!*********************************!*\
   !*** ./src/js/canvas/canvas.js ***!
@@ -96,7 +86,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _index_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../index.html */ \"./src/index.html\");\n/* harmony import */ var _css_fonts_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../css/fonts.css */ \"./src/css/fonts.css\");\n/* harmony import */ var _css_normalize_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../css/normalize.css */ \"./src/css/normalize.css\");\n/* harmony import */ var _css_index_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../css/index.css */ \"./src/css/index.css\");\n/* harmony import */ var _welcome_form_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./welcome-form.js */ \"./src/js/welcome-form.js\");\n\n\n\n\n\n\n//# sourceURL=webpack://dotsweb/./src/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css_fonts_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../css/fonts.css */ \"./src/css/fonts.css\");\n/* harmony import */ var _css_normalize_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../css/normalize.css */ \"./src/css/normalize.css\");\n/* harmony import */ var _css_index_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../css/index.css */ \"./src/css/index.css\");\n/* harmony import */ var _welcome_form_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./welcome-form.js */ \"./src/js/welcome-form.js\");\n\n\n\n\n\n//# sourceURL=webpack://dotsweb/./src/js/index.js?");
 
 /***/ }),
 
@@ -137,16 +127,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);\n// Imports\n\nvar ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});\n// Module\n___CSS_LOADER_EXPORT___.push([module.id, \"/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\\n\\n/* Document\\n   ========================================================================== */\\n\\n/**\\n * 1. Correct the line height in all browsers.\\n * 2. Prevent adjustments of font size after orientation changes in iOS.\\n */\\n\\n html {\\n    line-height: 1.15; /* 1 */\\n    -webkit-text-size-adjust: 100%; /* 2 */\\n  }\\n  \\n  /* Sections\\n     ========================================================================== */\\n  \\n  /**\\n   * Remove the margin in all browsers.\\n   */\\n  \\n  body {\\n    margin: 0;\\n  }\\n  \\n  /**\\n   * Render the `main` element consistently in IE.\\n   */\\n  \\n  main {\\n    display: block;\\n  }\\n  \\n  /**\\n   * Correct the font size and margin on `h1` elements within `section` and\\n   * `article` contexts in Chrome, Firefox, and Safari.\\n   */\\n  \\n  h1 {\\n    font-size: 2em;\\n    margin: 0.67em 0;\\n  }\\n  \\n  /* Grouping content\\n     ========================================================================== */\\n  \\n  /**\\n   * 1. Add the correct box sizing in Firefox.\\n   * 2. Show the overflow in Edge and IE.\\n   */\\n  \\n  hr {\\n    box-sizing: content-box; /* 1 */\\n    height: 0; /* 1 */\\n    overflow: visible; /* 2 */\\n  }\\n  \\n  /**\\n   * 1. Correct the inheritance and scaling of font size in all browsers.\\n   * 2. Correct the odd `em` font sizing in all browsers.\\n   */\\n  \\n  pre {\\n    font-family: monospace, monospace; /* 1 */\\n    font-size: 1em; /* 2 */\\n  }\\n  \\n  /* Text-level semantics\\n     ========================================================================== */\\n  \\n  /**\\n   * Remove the gray background on active links in IE 10.\\n   */\\n  \\n  a {\\n    background-color: transparent;\\n  }\\n  \\n  /**\\n   * 1. Remove the bottom border in Chrome 57-\\n   * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\\n   */\\n  \\n  abbr[title] {\\n    border-bottom: none; /* 1 */\\n    text-decoration: underline; /* 2 */\\n    text-decoration: underline dotted; /* 2 */\\n  }\\n  \\n  /**\\n   * Add the correct font weight in Chrome, Edge, and Safari.\\n   */\\n  \\n  b,\\n  strong {\\n    font-weight: bolder;\\n  }\\n  \\n  /**\\n   * 1. Correct the inheritance and scaling of font size in all browsers.\\n   * 2. Correct the odd `em` font sizing in all browsers.\\n   */\\n  \\n  code,\\n  kbd,\\n  samp {\\n    font-family: monospace, monospace; /* 1 */\\n    font-size: 1em; /* 2 */\\n  }\\n  \\n  /**\\n   * Add the correct font size in all browsers.\\n   */\\n  \\n  small {\\n    font-size: 80%;\\n  }\\n  \\n  /**\\n   * Prevent `sub` and `sup` elements from affecting the line height in\\n   * all browsers.\\n   */\\n  \\n  sub,\\n  sup {\\n    font-size: 75%;\\n    line-height: 0;\\n    position: relative;\\n    vertical-align: baseline;\\n  }\\n  \\n  sub {\\n    bottom: -0.25em;\\n  }\\n  \\n  sup {\\n    top: -0.5em;\\n  }\\n  \\n  /* Embedded content\\n     ========================================================================== */\\n  \\n  /**\\n   * Remove the border on images inside links in IE 10.\\n   */\\n  \\n  img {\\n    border-style: none;\\n  }\\n  \\n  /* Forms\\n     ========================================================================== */\\n  \\n  /**\\n   * 1. Change the font styles in all browsers.\\n   * 2. Remove the margin in Firefox and Safari.\\n   */\\n  \\n  button,\\n  input,\\n  optgroup,\\n  select,\\n  textarea {\\n    font-family: inherit; /* 1 */\\n    font-size: 100%; /* 1 */\\n    line-height: 1.15; /* 1 */\\n    margin: 0; /* 2 */\\n  }\\n  \\n  /**\\n   * Show the overflow in IE.\\n   * 1. Show the overflow in Edge.\\n   */\\n  \\n  button,\\n  input { /* 1 */\\n    overflow: visible;\\n  }\\n  \\n  /**\\n   * Remove the inheritance of text transform in Edge, Firefox, and IE.\\n   * 1. Remove the inheritance of text transform in Firefox.\\n   */\\n  \\n  button,\\n  select { /* 1 */\\n    text-transform: none;\\n  }\\n  \\n  /**\\n   * Correct the inability to style clickable types in iOS and Safari.\\n   */\\n  \\n  button,\\n  [type=\\\"button\\\"],\\n  [type=\\\"reset\\\"],\\n  [type=\\\"submit\\\"] {\\n    -webkit-appearance: button;\\n  }\\n  \\n  /**\\n   * Remove the inner border and padding in Firefox.\\n   */\\n  \\n  button::-moz-focus-inner,\\n  [type=\\\"button\\\"]::-moz-focus-inner,\\n  [type=\\\"reset\\\"]::-moz-focus-inner,\\n  [type=\\\"submit\\\"]::-moz-focus-inner {\\n    border-style: none;\\n    padding: 0;\\n  }\\n  \\n  /**\\n   * Restore the focus styles unset by the previous rule.\\n   */\\n  \\n  button:-moz-focusring,\\n  [type=\\\"button\\\"]:-moz-focusring,\\n  [type=\\\"reset\\\"]:-moz-focusring,\\n  [type=\\\"submit\\\"]:-moz-focusring {\\n    outline: 1px dotted ButtonText;\\n  }\\n  \\n  /**\\n   * Correct the padding in Firefox.\\n   */\\n  \\n  fieldset {\\n    padding: 0.35em 0.75em 0.625em;\\n  }\\n  \\n  /**\\n   * 1. Correct the text wrapping in Edge and IE.\\n   * 2. Correct the color inheritance from `fieldset` elements in IE.\\n   * 3. Remove the padding so developers are not caught out when they zero out\\n   *    `fieldset` elements in all browsers.\\n   */\\n  \\n  legend {\\n    box-sizing: border-box; /* 1 */\\n    color: inherit; /* 2 */\\n    display: table; /* 1 */\\n    max-width: 100%; /* 1 */\\n    padding: 0; /* 3 */\\n    white-space: normal; /* 1 */\\n  }\\n  \\n  /**\\n   * Add the correct vertical alignment in Chrome, Firefox, and Opera.\\n   */\\n  \\n  progress {\\n    vertical-align: baseline;\\n  }\\n  \\n  /**\\n   * Remove the default vertical scrollbar in IE 10+.\\n   */\\n  \\n  textarea {\\n    overflow: auto;\\n  }\\n  \\n  /**\\n   * 1. Add the correct box sizing in IE 10.\\n   * 2. Remove the padding in IE 10.\\n   */\\n  \\n  [type=\\\"checkbox\\\"],\\n  [type=\\\"radio\\\"] {\\n    box-sizing: border-box; /* 1 */\\n    padding: 0; /* 2 */\\n  }\\n  \\n  /**\\n   * Correct the cursor style of increment and decrement buttons in Chrome.\\n   */\\n  \\n  [type=\\\"number\\\"]::-webkit-inner-spin-button,\\n  [type=\\\"number\\\"]::-webkit-outer-spin-button {\\n    height: auto;\\n  }\\n  \\n  /**\\n   * 1. Correct the odd appearance in Chrome and Safari.\\n   * 2. Correct the outline style in Safari.\\n   */\\n  \\n  [type=\\\"search\\\"] {\\n    -webkit-appearance: textfield; /* 1 */\\n    outline-offset: -2px; /* 2 */\\n  }\\n  \\n  /**\\n   * Remove the inner padding in Chrome and Safari on macOS.\\n   */\\n  \\n  [type=\\\"search\\\"]::-webkit-search-decoration {\\n    -webkit-appearance: none;\\n  }\\n  \\n  /**\\n   * 1. Correct the inability to style clickable types in iOS and Safari.\\n   * 2. Change font properties to `inherit` in Safari.\\n   */\\n  \\n  ::-webkit-file-upload-button {\\n    -webkit-appearance: button; /* 1 */\\n    font: inherit; /* 2 */\\n  }\\n  \\n  /* Interactive\\n     ========================================================================== */\\n  \\n  /*\\n   * Add the correct display in Edge, IE 10+, and Firefox.\\n   */\\n  \\n  details {\\n    display: block;\\n  }\\n  \\n  /*\\n   * Add the correct display in all browsers.\\n   */\\n  \\n  summary {\\n    display: list-item;\\n  }\\n  \\n  /* Misc\\n     ========================================================================== */\\n  \\n  /**\\n   * Add the correct display in IE 10+.\\n   */\\n  \\n  template {\\n    display: none;\\n  }\\n  \\n  /**\\n   * Add the correct display in IE 10.\\n   */\\n  \\n  [hidden] {\\n    display: none;\\n  }\", \"\"]);\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);\n\n\n//# sourceURL=webpack://dotsweb/./src/css/normalize.css?./node_modules/css-loader/dist/cjs.js");
-
-/***/ }),
-
-/***/ "./src/index.html":
-/*!************************!*\
-  !*** ./src/index.html ***!
-  \************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/html-loader/dist/runtime/getUrl.js */ \"./node_modules/html-loader/dist/runtime/getUrl.js\");\n/* harmony import */ var _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0__);\n// Imports\n\nvar ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ./js/index.js */ \"./src/js/index.js\"), __webpack_require__.b);\nvar ___HTML_LOADER_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ./svg/logo.svg */ \"./src/svg/logo.svg\"), __webpack_require__.b);\n// Module\nvar ___HTML_LOADER_REPLACEMENT_0___ = _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default()(___HTML_LOADER_IMPORT_0___);\nvar ___HTML_LOADER_REPLACEMENT_1___ = _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default()(___HTML_LOADER_IMPORT_1___);\nvar code = \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n  <head>\\n    <meta charset=\\\"UTF-8\\\" />\\n    <meta http-equiv=\\\"X-UA-Compatible\\\" content=\\\"IE=edge\\\" />\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\" />\\n    <script type=\\\"module\\\" src=\\\"\" + ___HTML_LOADER_REPLACEMENT_0___ + \"\\\"></script>\\n    <title>Dots</title>\\n  </head>\\n  <body>\\n    <header class=\\\"header\\\">\\n      <img src=\\\"\" + ___HTML_LOADER_REPLACEMENT_1___ + \"\\\" alt=\\\"logo\\\" class=\\\"header__logo\\\" />\\n      <p class=\\\"header__lobby-name\\\"></p>\\n    </header>\\n    <div class=\\\"welcome-popup\\\">\\n      <h3 class=\\\"welcome-popup__title\\\">Вход в игру</h3>\\n      <form class=\\\"welcome-popup__form\\\">\\n        <div class=\\\"welcome-popup__nickname-section\\\">\\n          <label class=\\\"welcome-popup__nickname-label\\\">\\n            Твое имя:\\n            <input\\n              class=\\\"welcome-popup__nickname-field\\\"\\n              type=\\\"text\\\"\\n              name=\\\"nickname\\\"\\n              placeholder=\\\"имя\\\"\\n              autocomplete=\\\"off\\\"\\n              autofocus=\\\"autofocus\\\"\\n            />\\n          </label>\\n        </div>\\n        <ul class=\\\"color-picker\\\">\\n          <li class=\\\"color-picker__item\\\">\\n            <input\\n              type=\\\"radio\\\"\\n              name=\\\"color\\\"\\n              value=\\\"#ee2b2b\\\"\\n              class=\\\"color-picker__button color-picker__button_picked\\\"\\n              checked\\n            />\\n          </li>\\n          <li class=\\\"color-picker__item\\\">\\n            <input\\n              type=\\\"radio\\\"\\n              name=\\\"color\\\"\\n              value=\\\"#0bb870\\\"\\n              class=\\\"color-picker__button\\\"\\n            />\\n          </li>\\n          <li class=\\\"color-picker__item\\\">\\n            <input\\n              type=\\\"radio\\\"\\n              name=\\\"color\\\"\\n              value=\\\"#0db1f1\\\"\\n              class=\\\"color-picker__button\\\"\\n            />\\n          </li>\\n          <li class=\\\"color-picker__item\\\">\\n            <input\\n              type=\\\"radio\\\"\\n              name=\\\"color\\\"\\n              value=\\\"#e9a6da\\\"\\n              class=\\\"color-picker__button\\\"\\n            />\\n          </li>\\n          <li class=\\\"color-picker__item\\\">\\n            <input\\n              type=\\\"radio\\\"\\n              name=\\\"color\\\"\\n              value=\\\"#831583\\\"\\n              class=\\\"color-picker__button\\\"\\n            />\\n          </li>\\n        </ul>\\n        <input\\n          class=\\\"welcome-popup__submit\\\"\\n          type=\\\"submit\\\"\\n          name=\\\"submit\\\"\\n          value=\\\"Играть\\\"\\n        />\\n      </form>\\n    </div>\\n    <canvas class=\\\"canvas\\\" width=\\\"360\\\" height=\\\"360\\\">update browser</canvas>\\n  </body>\\n</html>\\n\";\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);\n\n//# sourceURL=webpack://dotsweb/./src/index.html?");
 
 /***/ }),
 
@@ -196,7 +176,7 @@ eval("\n\nvar isOldIE = function isOldIE() {\n  var memo;\n  return function mem
   \******************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"roboto-v27-latin_cyrillic-500.woff\";\n\n//# sourceURL=webpack://dotsweb/./src/fonts/roboto-v27-latin_cyrillic-500.woff?");
+eval("module.exports = __webpack_require__.p + \"085d1b4698b08a1cf7fd.woff\";\n\n//# sourceURL=webpack://dotsweb/./src/fonts/roboto-v27-latin_cyrillic-500.woff?");
 
 /***/ }),
 
@@ -206,7 +186,7 @@ eval("module.exports = __webpack_require__.p + \"roboto-v27-latin_cyrillic-500.w
   \*******************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"roboto-v27-latin_cyrillic-500.woff2\";\n\n//# sourceURL=webpack://dotsweb/./src/fonts/roboto-v27-latin_cyrillic-500.woff2?");
+eval("module.exports = __webpack_require__.p + \"3b5f561e8caa3803daee.woff2\";\n\n//# sourceURL=webpack://dotsweb/./src/fonts/roboto-v27-latin_cyrillic-500.woff2?");
 
 /***/ }),
 
@@ -216,7 +196,7 @@ eval("module.exports = __webpack_require__.p + \"roboto-v27-latin_cyrillic-500.w
   \**********************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"roboto-v27-latin_cyrillic-regular.woff\";\n\n//# sourceURL=webpack://dotsweb/./src/fonts/roboto-v27-latin_cyrillic-regular.woff?");
+eval("module.exports = __webpack_require__.p + \"90fc8764675b01c9cc05.woff\";\n\n//# sourceURL=webpack://dotsweb/./src/fonts/roboto-v27-latin_cyrillic-regular.woff?");
 
 /***/ }),
 
@@ -226,7 +206,7 @@ eval("module.exports = __webpack_require__.p + \"roboto-v27-latin_cyrillic-regul
   \***********************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"roboto-v27-latin_cyrillic-regular.woff2\";\n\n//# sourceURL=webpack://dotsweb/./src/fonts/roboto-v27-latin_cyrillic-regular.woff2?");
+eval("module.exports = __webpack_require__.p + \"91f689ac38236365183d.woff2\";\n\n//# sourceURL=webpack://dotsweb/./src/fonts/roboto-v27-latin_cyrillic-regular.woff2?");
 
 /***/ }),
 
@@ -236,17 +216,7 @@ eval("module.exports = __webpack_require__.p + \"roboto-v27-latin_cyrillic-regul
   \**************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"mike.jpg\";\n\n//# sourceURL=webpack://dotsweb/./src/img/mike.jpg?");
-
-/***/ }),
-
-/***/ "./src/svg/logo.svg":
-/*!**************************!*\
-  !*** ./src/svg/logo.svg ***!
-  \**************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-eval("module.exports = __webpack_require__.p + \"logo.svg\";\n\n//# sourceURL=webpack://dotsweb/./src/svg/logo.svg?");
+eval("module.exports = __webpack_require__.p + \"47a85ee166d23410ad2b.jpg\";\n\n//# sourceURL=webpack://dotsweb/./src/img/mike.jpg?");
 
 /***/ })
 
@@ -275,9 +245,6 @@ eval("module.exports = __webpack_require__.p + \"logo.svg\";\n\n//# sourceURL=we
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
@@ -352,37 +319,11 @@ eval("module.exports = __webpack_require__.p + \"logo.svg\";\n\n//# sourceURL=we
 /******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	(() => {
-/******/ 		__webpack_require__.b = document.baseURI || self.location.href;
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			"main": 0
-/******/ 		};
-/******/ 		
-/******/ 		// no chunk on demand loading
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		// no on chunks loaded
-/******/ 		
-/******/ 		// no jsonp function
-/******/ 	})();
-/******/ 	
 /************************************************************************/
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = __webpack_require__("./src/js/index.js");
 /******/ 	
 /******/ })()
