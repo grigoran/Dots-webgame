@@ -2,13 +2,15 @@ import { canvas, ctx } from "./../init-canvas.js";
 import { localPlayerNickname } from "../../welcome-form.js";
 import { Stage } from "./stage.js";
 
+import memImage from "../../../img/mike.jpg";
+
 export class MemAppear extends Stage {
   #img = new Image();
   #opacity = 0;
   #offset = 0;
   constructor() {
     super();
-    this.#img.src = "./img/mike.jpg";
+    this.#img.src = memImage;
   }
   #getOppacity(phase) {
     let val = Math.sin(phase) * 1.5;
