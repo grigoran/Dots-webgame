@@ -47,7 +47,7 @@ function createFormElement() {
     class="welcome-popup__nickname-field"
     type="text"
     name="nickname"
-    placeholder="Греча"
+    placeholder="плейсхолдер"
     autocomplete="off"
     autofocus="autofocus"
   />`;
