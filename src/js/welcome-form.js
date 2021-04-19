@@ -4,30 +4,35 @@ import { startGame } from "./canvas/canvas.js";
 export let localPlayerColor;
 export let localPlayerNickname;
 
-let popup = createPopupElement();
+let popupForm = createFormElement();
+let popup = createPopupElement(popupForm);
 
-document.addEventListener("DOMContentLoaded", loadHandler);
+//document.addEventListener("DOMContentLoaded", loadHandler);
+window.onload = loadHandler;
 
 function loadHandler() {
   document.body.append(popup);
-  setTimeout(() => {
+  requestAnimationFrame(() => {
     popup.classList.toggle("welcome-popup_shown");
-  }, 300);
+  });
 }
 
 function welcomeFormSubmit(event) {
+  if (popup.classList.contains("welcome-popup_shown")) {
+    localPlayerColor = popupForm.color.value;
+    localPlayerNickname = popupForm.nickname.value;
+    if (localPlayerNickname == "")
+      localPlayerNickname = popupForm.nickname.placeholder;
+    popup.classList.remove("welcome-popup_shown");
+    startGame();
+    setTimeout(() => popup.remove(), 150);
+  }
+  console.log(localPlayerColor);
+  console.log(localPlayerNickname);
   event.preventDefault();
 }
 
-function createPopupElement() {
-  let div = document.createElement("div");
-  div.className = "welcome-popup";
-
-  //popupHeader
-  let popupHeader = document.createElement("h3");
-  popupHeader.className = "welcome-popup__title";
-  popupHeader.innerText = "Вход в игру";
-
+function createFormElement() {
   //form
   let form = document.createElement("form");
   form.className = "welcome-popup__form";
@@ -62,6 +67,7 @@ function createPopupElement() {
     itemInput.setAttribute("type", "radio");
     itemInput.setAttribute("name", "color");
     itemInput.setAttribute("value", colors[i]);
+    if (i == 0) itemInput.setAttribute("checked", "");
 
     item.append(itemInput);
     itemInput.style.backgroundColor = colors[i];
@@ -80,6 +86,17 @@ function createPopupElement() {
   form.append(colorPicker);
   form.append(formSubmit);
   form.addEventListener("submit", welcomeFormSubmit);
+  return form;
+}
+
+function createPopupElement(form) {
+  let div = document.createElement("div");
+  div.className = "welcome-popup";
+
+  //popupHeader
+  let popupHeader = document.createElement("h3");
+  popupHeader.className = "welcome-popup__title";
+  popupHeader.innerText = "Вход в игру";
 
   //final
   div.append(popupHeader);

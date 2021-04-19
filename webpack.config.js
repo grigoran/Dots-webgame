@@ -17,7 +17,6 @@ module.exports = {
     filename: "bundle.js",
     clean: true,
   },
-  /*
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -31,7 +30,7 @@ module.exports = {
         },
       },
     },
-  },*/
+  },
   module: {
     rules: [
       {
@@ -44,8 +43,8 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-        //use: [MiniCssExtractPlugin.loader, "css-loader"],
+        //use: ["style-loader", "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
