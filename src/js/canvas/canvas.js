@@ -2,7 +2,7 @@ import { canvas, ctx } from "./init-canvas.js";
 
 import { Stage } from "./stages/stage.js";
 import { GameLoading } from "./stages/game-loading.js";
-import { MemAppear } from "./stages/mem-appear.js";
+import { FieldAppear } from "./stages/field-appear.js";
 
 export function startGame() {
   lastTime = Date.now();
@@ -12,18 +12,16 @@ let lastTime = Date.now();
 
 Stage.prototype.onComplete = () => {
   currentStage = currentStage.getNext();
+  ctx.restore();
 };
 
 //init game stages
 let gameLoadStage = new GameLoading();
-let memAppearStage = new MemAppear();
-let clearStage = new Stage();
+let fieldAppearStage = new FieldAppear();
 
 //game stages dependences
-gameLoadStage.setNext(memAppearStage);
-memAppearStage.setNext(clearStage);
-
 let currentStage = gameLoadStage;
+gameLoadStage.setNext(fieldAppearStage);
 
 function gameLoop() {
   let nowTime = Date.now();

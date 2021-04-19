@@ -6,8 +6,8 @@ import { canvas, ctx } from "../init-canvas.js";
 export class GameLoading extends Stage {
   #screenWidth = canvas.width;
   #screenHeight = canvas.height;
-  #radius = 10;
-  #totalShapeCount = 100;
+  #radius = 7;
+  #totalShapeRadius = 70;
   #circleCount = 5;
   #speed = 1;
   #offset = 0;
@@ -23,8 +23,8 @@ export class GameLoading extends Stage {
       ctx.beginPath();
       let angle = this.#getAngle(this.#offset + i * 0.1);
       ctx.arc(
-        Math.sin(angle) * this.#totalShapeCount + this.#screenWidth / 2,
-        Math.cos(angle) * this.#totalShapeCount + this.#screenHeight / 2,
+        Math.sin(angle) * this.#totalShapeRadius + this.#screenWidth / 2,
+        Math.cos(angle) * this.#totalShapeRadius + this.#screenHeight / 2,
         this.#radius,
         0,
         Math.PI * 2
@@ -32,14 +32,13 @@ export class GameLoading extends Stage {
       ctx.fill();
     }
     this.#offset += this.#speed * deltaTime;
-    if (this.#offset >= Math.PI) {
+    if (this.#offset >= Math.PI / 4) {
       if (this.#nowAlpha > 0) this.#nowAlpha -= this.#speed * deltaTime;
       this.#nowAlpha < 0
         ? (ctx.globalAlpha = 0)
         : (ctx.globalAlpha = this.#nowAlpha);
       if (this.#nowAlpha <= 0) {
         this.onComplete();
-        ctx.globalAlpha = 1;
       }
     }
   }
