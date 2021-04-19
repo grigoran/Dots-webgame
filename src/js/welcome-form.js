@@ -1,6 +1,8 @@
+import style from "../css/welcome-popup.css";
+import { startGame } from "./canvas/canvas.js";
+
 export let localPlayerColor;
 export let localPlayerNickname;
-import { startGame } from "./canvas/canvas.js";
 
 setButtonsColor();
 let welcome_popup = document.querySelector(".welcome-popup");
@@ -10,7 +12,9 @@ document.addEventListener("DOMContentLoaded", loadHandler);
 welcome_popup__form.addEventListener("submit", welcomeFormSubmit);
 
 function loadHandler() {
-  setTimeout(() => welcome_popup.classList.toggle("welcome-popup_shown"), 150);
+  setTimeout(() => {
+    welcome_popup.classList.toggle("welcome-popup_shown");
+  }, 150);
 }
 
 function welcomeFormSubmit(event) {
