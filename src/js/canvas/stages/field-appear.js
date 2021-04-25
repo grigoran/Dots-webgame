@@ -10,7 +10,8 @@ export class FieldAppear extends Stage {
     ctx.beginPath();
     ctx.strokeStyle = "black";
     ctx.lineWidth = 2;
-    this.offset += this.offset >= canvas.height ? 0 : deltaTime * this.speed;
+    this.offset += deltaTime * this.speed;
+    if (this.offset >= canvas.height) this.onComplete();
     for (let i = 0; i < field.size.x; i++) {
       ctx.moveTo(i * this.step + this.step / 2, 0);
       ctx.lineTo(i * this.step + this.step / 2, this.offset);
