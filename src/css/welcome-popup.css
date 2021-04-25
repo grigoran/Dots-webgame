@@ -75,7 +75,8 @@
 
 .color-picker__button {
   appearance: none;
-
+  -webkit-appearance: none;
+  -moz-appearance: none;
   border-radius: 50%;
   width: 32px;
   height: 32px;
