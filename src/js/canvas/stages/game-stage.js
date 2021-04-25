@@ -5,38 +5,46 @@ import { field } from "../field.js";
 
 import memImage from "../../../img/mike.jpg";
 
-document.addEventListener("mousemove", mouseMoveHandler);
+document.addEventListener("mousemove", getMouseHandler());
 
-let mousePos = {
-  x: 0,
-  y: 0,
-};
+function Vector() {
+  this.x = 0;
+  this.y = 0;
+}
 
-let currentCursorPos = mousePos;
+let mousePos = new Vector();
 
-let cursorTarget = mousePos;
+let cursor = {};
+cursor.pos = new Vector();
+cursor.target = new Vector();
+cursor.radius = 10;
+cursor.speed = 10;
 
-function mouseMoveHandler(event) {
+function getMouseHandler() {
   let rect = canvas.getBoundingClientRect();
   let scaleX = canvas.width / rect.width;
   let scaleY = canvas.height / rect.height;
-  mousePos.x = (event.clientX - rect.left) * scaleX;
-  mousePos.y = (event.clientY - rect.top) * scaleY;
+  return function (event) {
+    mousePos.x = (event.clientX - rect.left) * scaleX;
+    mousePos.y = (event.clientY - rect.top) * scaleY;
+  };
 }
 
-function drawCursor() {
-  let cursorRadius = 10;
+cursor.draw = function () {
   ctx.beginPath();
   ctx.fillStyle = localPlayerColor;
-  cursorTarget = field.getTargetCoord(mousePos);
-  currentCursorPos = cursorTarget;
-  ctx.arc(currentCursorPos.x, currentCursorPos.y, cursorRadius, 0, 2 * Math.PI);
+  ctx.arc(cursor.pos.x, cursor.pos.y, cursor.radius, 0, 2 * Math.PI);
   ctx.fill();
-}
+};
 
 export class GameStage extends Stage {
   update(deltaTime) {
     field.drawField();
-    drawCursor();
+
+    cursor.target = field.getTargetCoord(mousePos);
+    cursor.pos.x += (cursor.target.x - cursor.pos.x) * deltaTime * cursor.speed;
+    cursor.pos.y += (cursor.target.y - cursor.pos.y) * deltaTime * cursor.speed;
+
+    cursor.draw();
   }
 }
