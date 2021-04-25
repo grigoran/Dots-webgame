@@ -25,11 +25,12 @@ function mouseMoveHandler(event) {
 }
 
 function drawCursor() {
+  let cursorRadius = 10;
   ctx.beginPath();
   ctx.fillStyle = localPlayerColor;
   cursorTarget = field.getTargetCoord(mousePos);
   currentCursorPos = cursorTarget;
-  ctx.arc(currentCursorPos.x, currentCursorPos.y, 10, 0, 2 * Math.PI);
+  ctx.arc(currentCursorPos.x, currentCursorPos.y, cursorRadius, 0, 2 * Math.PI);
   ctx.fill();
 }
 

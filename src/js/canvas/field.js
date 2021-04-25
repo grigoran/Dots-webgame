@@ -29,8 +29,8 @@ class Field {
   }
   getTargetCoord(pos) {
     return {
-      x: Math.floor(pos.x / this.#step) * this.#step,
-      y: Math.floor(pos.y / this.#step) * this.#step,
+      x: Math.floor(pos.x / this.#step) * this.#step + this.#step / 2,
+      y: Math.floor(pos.y / this.#step) * this.#step + this.#step / 2,
     };
   }
 }
