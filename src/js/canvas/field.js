@@ -1,5 +1,11 @@
 import { canvas, ctx } from "./init-canvas.js";
 
+function map(val, beg, end) {
+  let ret = val > end ? end : val;
+  ret = ret < beg ? beg : ret;
+  return ret;
+}
+
 class Field {
   #step = 0;
   constructor() {
@@ -28,9 +34,12 @@ class Field {
     };
   }
   getTargetCoord(pos) {
+    let meshPos = {};
+    meshPos.x = map(Math.floor(pos.x / this.#step), 0, this.size.x - 1);
+    meshPos.y = map(Math.floor(pos.y / this.#step), 0, this.size.y - 1);
     return {
-      x: Math.floor(pos.x / this.#step) * this.#step + this.#step / 2,
-      y: Math.floor(pos.y / this.#step) * this.#step + this.#step / 2,
+      x: meshPos.x * this.#step + this.#step / 2,
+      y: meshPos.y * this.#step + this.#step / 2,
     };
   }
 }
