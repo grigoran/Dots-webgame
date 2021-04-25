@@ -12,6 +12,10 @@ let mousePos = {
   y: 0,
 };
 
+let currentCursorPos = mousePos;
+
+let cursorTarget = mousePos;
+
 function mouseMoveHandler(event) {
   let rect = canvas.getBoundingClientRect();
   let scaleX = canvas.width / rect.width;
@@ -23,7 +27,9 @@ function mouseMoveHandler(event) {
 function drawCursor() {
   ctx.beginPath();
   ctx.fillStyle = localPlayerColor;
-  ctx.arc(mousePos.x, mousePos.y, 10, 0, 2 * Math.PI);
+  cursorTarget = field.getTargetCoord(mousePos);
+  currentCursorPos = cursorTarget;
+  ctx.arc(currentCursorPos.x, currentCursorPos.y, 10, 0, 2 * Math.PI);
   ctx.fill();
 }
 
