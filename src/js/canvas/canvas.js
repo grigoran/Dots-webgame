@@ -14,6 +14,7 @@ let lastTime = Date.now();
 
 Stage.prototype.onComplete = () => {
   currentStage = currentStage.getNext();
+  currentStage.init();
   ctx.restore();
 };
 

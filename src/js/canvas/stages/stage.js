@@ -9,5 +9,6 @@ export class Stage {
   onComplete() {
     alert("complete");
   }
+  init() {}
   update(deltaTime) {}
 }

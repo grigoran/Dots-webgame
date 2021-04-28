@@ -5,8 +5,6 @@ import { field } from "../field.js";
 
 import memImage from "../../../img/mike.jpg";
 
-document.addEventListener("mousemove", getMouseHandler());
-
 function Vector() {
   this.x = 0;
   this.y = 0;
@@ -38,6 +36,12 @@ cursor.draw = function () {
 };
 
 export class GameStage extends Stage {
+  init() {
+    document.addEventListener("mousemove", getMouseHandler());
+    document.addEventListener("click", () => {
+      field.placeDot(mousePos, localPlayerColor);
+    });
+  }
   update(deltaTime) {
     field.drawField();
 
