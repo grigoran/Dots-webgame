@@ -22,6 +22,7 @@ export class GameStage extends Stage {
     document.addEventListener("mousemove", getMouseHandler());
     document.addEventListener("click", () => {
       field.placeDot(mousePos, localPlayerColor);
+      cursor.click();
     });
   }
   update(deltaTime) {
@@ -30,7 +31,7 @@ export class GameStage extends Stage {
     cursor.target = field.getTargetCoord(mousePos);
     cursor.pos.x += (cursor.target.x - cursor.pos.x) * deltaTime * cursor.speed;
     cursor.pos.y += (cursor.target.y - cursor.pos.y) * deltaTime * cursor.speed;
-
+    cursor.update(deltaTime);
     cursor.draw();
   }
 }
