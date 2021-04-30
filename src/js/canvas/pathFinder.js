@@ -3,7 +3,7 @@ import { Vector } from "./vector.js";
 let dotsArr = [];
 let startPos = new Vector();
 let color = "";
-let paths = [];
+let candidatePaths = [];
 
 export let assignDotsArr = function (arr) {
   dotsArr = arr;
@@ -34,14 +34,40 @@ function nextPos(dir, pos) {
 export function findPath(pos) {
   startPos = new Vector(pos.x, pos.y);
   color = dotsArr[pos.x][pos.y];
-  recurcivePath(startPos, 0, [], startPos);
-  if (paths.length >= 1) console.log(paths);
+  candidatePaths = [];
+  recurcivePath(startPos, [], startPos);
+  if (candidatePaths.length > 0) {
+    return [...candidatePaths[maxAreaIndex(candidatePaths)]];
+  } else return [];
 }
 
-function recurcivePath(pos, index, path, prevPos) {
+function findArea(path) {
+  let area = 0;
+  for (let i = 0; i < path.length; i++) {
+    area += (path[i].x * path[(i + 1) % path.length].y) / 2;
+    area -= (path[(i + 1) % path.length].x * path[i].y) / 2;
+  }
+  return area;
+}
+
+function maxAreaIndex(paths) {
+  let maxArea = 0;
+  let nowArea = 0;
+  let index = 0;
+  for (let i = 0; i < paths.length; i++) {
+    nowArea = findArea(paths[i]);
+    if (nowArea > maxArea) {
+      maxArea = nowArea;
+      index = i;
+    }
+  }
+  return index;
+}
+
+function recurcivePath(pos, path, prevPos) {
   let next;
-  if (index != 0 && pos.x == startPos.x && pos.y == startPos.y) {
-    paths.push([...path]);
+  if (path.length != 0 && pos.x == startPos.x && pos.y == startPos.y) {
+    candidatePaths.push([...path]);
     return;
   }
   path.push(pos);
@@ -49,7 +75,7 @@ function recurcivePath(pos, index, path, prevPos) {
     next = nextPos(i, pos);
     if (next.x == prevPos.x && next.y == prevPos.y) continue;
     if (dotsArr[next.x][next.y] == color) {
-      recurcivePath(next, ++index, [...path], pos);
+      recurcivePath(next, [...path], pos);
     }
   }
 }

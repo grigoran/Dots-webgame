@@ -8,6 +8,7 @@ class Dots {
   #step = 0;
   #size = {};
   #dotRadius = 8;
+  #paths = [];
   constructor() {
     this.init = function (size, step) {
       this.#step = step;
@@ -22,7 +23,8 @@ class Dots {
     };
     this.push = function (pos, color) {
       dotsArr[pos.x][pos.y] = color;
-      findPath(pos);
+      let path = findPath(pos);
+      if (path.length > 0) this.#paths.push(path);
     };
     this.draw = function () {
       let color = "";
@@ -41,6 +43,20 @@ class Dots {
           );
           ctx.fill();
         }
+      }
+      //draw paths
+      for (let path of this.#paths) {
+        ctx.beginPath();
+        ctx.strokeStyle = dotsArr[path[0].x][path[0].y];
+        ctx.lineWidth = 3;
+        for (let pos of path) {
+          ctx.lineTo(
+            pos.x * this.#step + this.#step / 2,
+            pos.y * this.#step + this.#step / 2
+          );
+        }
+        ctx.closePath();
+        ctx.stroke();
       }
     };
   }
