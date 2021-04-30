@@ -27,8 +27,6 @@ function welcomeFormSubmit(event) {
     startGame();
     setTimeout(() => popup.remove(), 150);
   }
-  console.log(localPlayerColor);
-  console.log(localPlayerNickname);
   event.preventDefault();
 }
 

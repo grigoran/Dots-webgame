@@ -41,7 +41,7 @@ class Field {
   }
   placeDot(pos, color) {
     let newPos = this.getMeshCoord(pos);
-    dots.push(newPos.x, newPos.y);
+    dots.push(newPos, color);
   }
   getMeshCoord(pos) {
     return {

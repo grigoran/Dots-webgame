@@ -10,7 +10,6 @@ let animationSpeed = 290; //percent per second
 function getProgress(progress) {
   let prog = Math.cos((Math.PI * progress) / 100);
   prog = Math.abs(prog);
-  console.log(prog);
   return prog;
 }
 

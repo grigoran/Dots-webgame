@@ -1,7 +1,9 @@
 import { canvas, ctx } from "./init-canvas.js";
+import { assignDotsArr, findPath } from "./pathFinder.js";
 
 let dotsArr = [];
 const TWO_PI = 2 * Math.PI;
+
 class Dots {
   #step = 0;
   #size = {};
@@ -16,9 +18,11 @@ class Dots {
           dotsArr[i][j] = "";
         }
       }
+      assignDotsArr(dotsArr);
     };
-    this.push = function (x, y, color) {
-      dotsArr[x][y] = color;
+    this.push = function (pos, color) {
+      dotsArr[pos.x][pos.y] = color;
+      findPath(pos);
     };
     this.draw = function () {
       let color = "";
