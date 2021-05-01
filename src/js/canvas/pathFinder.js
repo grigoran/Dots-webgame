@@ -48,7 +48,7 @@ function recurcivePath(pos, path, prevPos) {
   for (let i = 0; i < 8; i++) {
     next = nextPos(i, pos);
     if (next.x == prevPos.x && next.y == prevPos.y) continue;
-    if (dotArr.getColor(next) == color) {
+    if (dotArr.getColor(next) == color && !dotArr.isConnected(next)) {
       recurcivePath(next, [...path], pos);
     }
   }

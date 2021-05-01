@@ -25,6 +25,9 @@ function DotArr(size) {
   this.connect = function (pos) {
     arr[pos.x][pos.y].connected = true;
   };
+  this.isConnected = function (pos) {
+    return arr[pos.x][pos.y].connected;
+  };
 }
 
 let dotArr = {};
