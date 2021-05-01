@@ -104,9 +104,6 @@ function maxAreaIndex(paths) {
       minArea = areas[i];
     }
   }
-  console.log(findArea(paths[resIndex]) - paths[resIndex].length / 2 + 1);
-  console.log(resIndex);
-  console.log(indexes);
   return resIndex;
 }
 
