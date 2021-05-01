@@ -32,12 +32,18 @@ let findPath = function (pos) {
   color = dotArr.getColor(pos);
   candidatePaths = [];
   recurcivePath(startPos, [], startPos);
-  for (let path of candidatePaths) markDotsAsConnected(path);
   if (candidatePaths.length > 0) {
-    return [...candidatePaths[maxAreaIndex(candidatePaths)]];
+    let pathIndex = maxAreaIndex(candidatePaths);
+    let result = [];
+    if (pathIndex >= 0) {
+      result = [...candidatePaths[pathIndex]];
+      markDotsAsConnected(result);
+    }
+    return result;
   } else return [];
 };
 
+/*В этом алгоритме присутствует проверка 3х последних эллементво во избеании замыкания*/
 function recurcivePath(pos, path, prevPos) {
   let next;
   if (path.length != 0 && pos.x == startPos.x && pos.y == startPos.y) {
@@ -48,24 +54,57 @@ function recurcivePath(pos, path, prevPos) {
   for (let i = 0; i < 8; i++) {
     next = nextPos(i, pos);
     if (next.x == prevPos.x && next.y == prevPos.y) continue;
-    if (dotArr.getColor(next) == color && !dotArr.isConnected(next)) {
+    if (
+      dotArr.getColor(next) == color &&
+      !dotArr.isConnected(next) &&
+      !findInLastFour(path, next)
+    ) {
       recurcivePath(next, [...path], pos);
     }
   }
 }
 
-function maxAreaIndex(paths) {
-  let maxArea = 0;
-  let nowArea = 0;
-  let index = 0;
-  for (let i = 0; i < paths.length; i++) {
-    nowArea = findArea(paths[i]);
-    if (nowArea > maxArea) {
-      maxArea = nowArea;
-      index = i;
+function findInLastFour(path, pos) {
+  for (let i = path.length - 1; i >= 1; --i) {
+    if (pos.x == path[i].x && pos.y == path[i].y) {
+      return true;
     }
   }
-  return index;
+  return false;
+}
+
+function maxAreaIndex(paths) {
+  let nowArea = 0;
+  let maxNodes = 0; //формула пика
+  let insideNodes = 0;
+  let indexes = [];
+  let areas = [];
+  for (let i = 0; i < paths.length; i++) {
+    nowArea = findArea(paths[i]);
+    if (nowArea <= 0) continue;
+    insideNodes = nowArea - paths[i].length / 2 + 1; //формула пика
+    if (insideNodes <= 0) continue;
+    if (insideNodes > maxNodes) {
+      maxNodes = insideNodes;
+      indexes = [i];
+      areas = [nowArea];
+    }
+    if (insideNodes == maxNodes) {
+      indexes.push(i);
+      areas.push(nowArea);
+    }
+  }
+  console.log(insideNodes);
+  if (indexes.length < 1) return -1;
+  let minArea = areas[0];
+  let resIndex = 0;
+  for (let i = 1; i < indexes.length; i++) {
+    if (areas[i] < minArea) {
+      resIndex = indexes[i];
+      minArea = areas[i];
+    }
+  }
+  return resIndex;
 }
 
 function findArea(path) {
