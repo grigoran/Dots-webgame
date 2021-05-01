@@ -4,12 +4,11 @@ import { localPlayerNickname, localPlayerColor } from "../welcome-form.js";
 
 let nowRadius = 0;
 let animationProgress = 100;
-let animationSpeed = 290; //percent per second
+let animationSpeed = 500; //percent per second
 
 //calculate value between 0 and 1 dependent on animation Progress(0:100);
 function getProgress(progress) {
-  let prog = Math.cos((Math.PI * progress) / 100);
-  prog = Math.abs(prog);
+  let prog = progress / 100;
   return prog;
 }
 
@@ -26,7 +25,7 @@ function Cursor() {
     ctx.fill();
   };
   this.click = function () {
-    animationProgress = 13;
+    animationProgress = 0;
     nowRadius = 0;
   };
   this.update = function (deltaTime) {

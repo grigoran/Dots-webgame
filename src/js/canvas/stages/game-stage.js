@@ -21,8 +21,8 @@ export class GameStage extends Stage {
   init() {
     document.addEventListener("mousemove", getMouseHandler());
     document.addEventListener("click", () => {
-      field.placeDot(mousePos, localPlayerColor);
       cursor.click();
+      field.placeDot(mousePos, localPlayerColor);
     });
   }
   update(deltaTime) {
