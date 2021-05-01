@@ -32,6 +32,7 @@ let findPath = function (pos) {
   color = dotArr.getColor(pos);
   candidatePaths = [];
   recurcivePath(startPos, [], startPos);
+  for (let path of candidatePaths) markDotsAsConnected(path);
   if (candidatePaths.length > 0) {
     return [...candidatePaths[maxAreaIndex(candidatePaths)]];
   } else return [];
@@ -75,6 +76,12 @@ function findArea(path) {
     area -= (path[(i + 1) % path.length].x * path[i].y) / 2;
   }
   return area;
+}
+
+function markDotsAsConnected(path) {
+  for (let pos of path) {
+    dotArr.connect(pos);
+  }
 }
 
 let PathFinder = function () {
