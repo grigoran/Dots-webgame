@@ -1,8 +1,33 @@
 import { canvas, ctx } from "./init-canvas.js";
-import { assignDotsArr, findPath } from "./pathFinder.js";
+import { pathFinder } from "./pathFinder.js";
 
-let dotsArr = [];
 const TWO_PI = 2 * Math.PI;
+
+function Dot() {
+  this.color = "";
+  this.connected = false;
+}
+
+function DotArr(size) {
+  let arr = [];
+  for (let i = 0; i < size.x; i++) {
+    arr[i] = [];
+    for (let j = 0; j < size.y; j++) {
+      arr[i][j] = new Dot();
+    }
+  }
+  this.getColor = function (pos) {
+    return arr[pos.x][pos.y].color;
+  };
+  this.setColor = function (pos, color) {
+    arr[pos.x][pos.y].color = color;
+  };
+  this.connect = function (pos) {
+    arr[pos.x][pos.y].connected = true;
+  };
+}
+
+let dotArr = {};
 
 class Dots {
   #step = 0;
@@ -13,24 +38,19 @@ class Dots {
     this.init = function (size, step) {
       this.#step = step;
       this.#size = size;
-      for (let i = 0; i < size.x; i++) {
-        dotsArr[i] = [];
-        for (let j = 0; j < size.y; j++) {
-          dotsArr[i][j] = "";
-        }
-      }
-      assignDotsArr(dotsArr);
+      dotArr = new DotArr(size);
+      pathFinder.assignArr(dotArr);
     };
     this.push = function (pos, color) {
-      dotsArr[pos.x][pos.y] = color;
-      let path = findPath(pos);
+      dotArr.setColor(pos, color);
+      let path = pathFinder.findPath(pos);
       if (path.length > 0) this.#paths.push(path);
     };
     this.draw = function () {
       let color = "";
       for (let i = 0; i < this.#size.x; i++) {
         for (let j = 0; j < this.#size.y; j++) {
-          color = dotsArr[i][j];
+          color = dotArr.getColor({ x: i, y: j });
           if (color == "") continue;
           ctx.beginPath();
           ctx.fillStyle = color;
@@ -47,7 +67,7 @@ class Dots {
       //draw paths
       for (let path of this.#paths) {
         ctx.beginPath();
-        ctx.strokeStyle = dotsArr[path[0].x][path[0].y];
+        ctx.strokeStyle = dotArr.getColor(path[0]);
         ctx.lineWidth = 3;
         for (let pos of path) {
           ctx.lineTo(

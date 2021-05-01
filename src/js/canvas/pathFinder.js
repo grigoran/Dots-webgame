@@ -1,13 +1,9 @@
 import { Vector } from "./vector.js";
 
-let dotsArr = [];
+let dotArr = {};
 let startPos = new Vector();
 let color = "";
 let candidatePaths = [];
-
-export let assignDotsArr = function (arr) {
-  dotsArr = arr;
-};
 
 function nextPos(dir, pos) {
   let newPos = {};
@@ -31,23 +27,30 @@ function nextPos(dir, pos) {
   }
 }
 
-export function findPath(pos) {
+let findPath = function (pos) {
   startPos = new Vector(pos.x, pos.y);
-  color = dotsArr[pos.x][pos.y];
+  color = dotArr.getColor(pos);
   candidatePaths = [];
   recurcivePath(startPos, [], startPos);
   if (candidatePaths.length > 0) {
     return [...candidatePaths[maxAreaIndex(candidatePaths)]];
   } else return [];
-}
+};
 
-function findArea(path) {
-  let area = 0;
-  for (let i = 0; i < path.length; i++) {
-    area += (path[i].x * path[(i + 1) % path.length].y) / 2;
-    area -= (path[(i + 1) % path.length].x * path[i].y) / 2;
+function recurcivePath(pos, path, prevPos) {
+  let next;
+  if (path.length != 0 && pos.x == startPos.x && pos.y == startPos.y) {
+    candidatePaths.push([...path]);
+    return;
   }
-  return area;
+  path.push(pos);
+  for (let i = 0; i < 8; i++) {
+    next = nextPos(i, pos);
+    if (next.x == prevPos.x && next.y == prevPos.y) continue;
+    if (dotArr.getColor(next) == color) {
+      recurcivePath(next, [...path], pos);
+    }
+  }
 }
 
 function maxAreaIndex(paths) {
@@ -64,18 +67,20 @@ function maxAreaIndex(paths) {
   return index;
 }
 
-function recurcivePath(pos, path, prevPos) {
-  let next;
-  if (path.length != 0 && pos.x == startPos.x && pos.y == startPos.y) {
-    candidatePaths.push([...path]);
-    return;
+function findArea(path) {
+  //формула Гаусса
+  let area = 0;
+  for (let i = 0; i < path.length; i++) {
+    area += (path[i].x * path[(i + 1) % path.length].y) / 2;
+    area -= (path[(i + 1) % path.length].x * path[i].y) / 2;
   }
-  path.push(pos);
-  for (let i = 0; i < 8; i++) {
-    next = nextPos(i, pos);
-    if (next.x == prevPos.x && next.y == prevPos.y) continue;
-    if (dotsArr[next.x][next.y] == color) {
-      recurcivePath(next, [...path], pos);
-    }
-  }
+  return area;
 }
+
+let PathFinder = function () {
+  this.assignArr = function (arr) {
+    dotArr = arr;
+  };
+  this.findPath = findPath;
+};
+export let pathFinder = new PathFinder();
