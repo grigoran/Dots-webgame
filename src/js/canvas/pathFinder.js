@@ -75,7 +75,7 @@ function findInLastFour(path, pos) {
 
 function maxAreaIndex(paths) {
   let nowArea = 0;
-  let maxNodes = 0; //формула пика
+  let maxNodes = 0;
   let insideNodes = 0;
   let indexes = [];
   let areas = [];
@@ -88,22 +88,25 @@ function maxAreaIndex(paths) {
       maxNodes = insideNodes;
       indexes = [i];
       areas = [nowArea];
-    }
-    if (insideNodes == maxNodes) {
+    } else if (insideNodes == maxNodes) {
       indexes.push(i);
       areas.push(nowArea);
     }
   }
-  console.log(insideNodes);
+
+  if (maxNodes == 0) return -1;
   if (indexes.length < 1) return -1;
   let minArea = areas[0];
-  let resIndex = 0;
+  let resIndex = indexes[0];
   for (let i = 1; i < indexes.length; i++) {
     if (areas[i] < minArea) {
       resIndex = indexes[i];
       minArea = areas[i];
     }
   }
+  console.log(findArea(paths[resIndex]) - paths[resIndex].length / 2 + 1);
+  console.log(resIndex);
+  console.log(indexes);
   return resIndex;
 }
 
