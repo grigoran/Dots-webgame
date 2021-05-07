@@ -29,14 +29,22 @@ function Lobby(id) {
   this.clients = [];
   this.join = (ws) => {
     this.clients.push(ws);
-    setInterval(() => {
-      ws.ping();
+    let pingTimer = setInterval(() => {
+      if (ws.readyState == 1) ws.ping();
+      else {
+        clearInterval(pingTimer);
+        lobbyPool.closeLobby(this.id);
+      }
     }, 1000);
     ws.on("pong", () => lobbyPool.keepAlive(this.id));
+    ws.on("close", () => {
+      console.log(`client leave from lobby ${id}`);
+    });
   };
   this.send = (message, ws) => {
     //when have ws argument, then send everyone exept ws
     this.clients.forEach((client) => {
+      if (client.readyState != 1) return;
       if (client != ws) client.send(message);
     });
   };
