@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.prod.js",
     "deploy": "git subtree push --prefix=serv origin deploy",
-    "start": "webpack serve --open --config webpack.dev.js",
+    "start": "webpack --config webpack.dev.js --watch & nodemon serv/app.js",
     "app": "nodemon serv/app.js"
   },
   "repository": {

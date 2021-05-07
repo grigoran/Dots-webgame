@@ -13,20 +13,6 @@ module.exports = {
     filename: "[name].js",
     clean: true,
   },
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        styles: {
-          name: "styles",
-          type: "css/mini-extract",
-          // For webpack@4
-          // test: /\.css$/,
-          chunks: "all",
-          enforce: true,
-        },
-      },
-    },
-  },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index/index.html",
