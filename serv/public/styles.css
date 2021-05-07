@@ -353,9 +353,9 @@
   font-style: normal;
   font-weight: 400;
   src: local(""),
-    url(91f689ac38236365183d.woff2) format("woff2"),
+    url(/91f689ac38236365183d.woff2) format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url(90fc8764675b01c9cc05.woff) format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+      url(/90fc8764675b01c9cc05.woff) format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* roboto-500 - latin_cyrillic */
 @font-face {
@@ -363,9 +363,9 @@
   font-style: normal;
   font-weight: 500;
   src: local(""),
-    url(3b5f561e8caa3803daee.woff2) format("woff2"),
+    url(/3b5f561e8caa3803daee.woff2) format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url(085d1b4698b08a1cf7fd.woff) format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+      url(/085d1b4698b08a1cf7fd.woff) format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
 body {

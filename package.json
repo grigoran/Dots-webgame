@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.prod.js",
-    "deploy": "git subtree push --prefix=dist origin gh-pages",
-    "start": "webpack serve --open --config webpack.dev.js"
+    "deploy": "git subtree push --prefix=serv origin deploy",
+    "start": "webpack serve --open --config webpack.dev.js",
+    "app": "nodemon serv/app.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.1",
     "mini-css-extract-plugin": "^1.5.0",
+    "nodemon": "^2.0.7",
     "style-loader": "^2.0.0",
     "webpack": "^5.33.2",
     "webpack-cli": "^4.6.0",

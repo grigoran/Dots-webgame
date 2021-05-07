@@ -3,10 +3,14 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: "./src/js/index.js",
+  entry: {
+    index: "./src/index/index.js",
+    lobby: "./src/lobby/js/index.js",
+  },
   output: {
-    path: path.resolve(__dirname, "serv/public"),
-    filename: "bundle.js",
+    path: __dirname + "/serv/public",
+    publicPath: "/",
+    filename: "[name].js",
     clean: true,
   },
   optimization: {
@@ -24,7 +28,18 @@ module.exports = {
     },
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: "./src/index.html" }),
+    new HtmlWebpackPlugin({
+      template: "./src/index/index.html",
+      filename: "index.html",
+      chunks: ["index"],
+      cache: true,
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/lobby/index.html",
+      filename: "lobby.html",
+      chunks: ["lobby"],
+      cache: true,
+    }),
     new MiniCssExtractPlugin(),
   ],
   module: {
