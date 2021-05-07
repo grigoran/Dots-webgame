@@ -25,18 +25,20 @@ export let gameServer = {
 };
 
 socket.onopen = function (e) {
-  socket.onmessage = (event) => {
-    let message = event.data;
-    let command = message.split(" ");
-    console.log(message);
-    if (command[0] == "start") {
-      onstart(socket);
-    }
-    if (command[0] == "player") {
-      playerRequest(command[1], command[2]);
-    }
-    if (command[0] == "place") {
-      place({ x: Number(command[1]), y: Number(command[2]) });
-    }
-  };
+  socket.send("con");
+};
+
+socket.onmessage = (event) => {
+  let message = event.data;
+  let command = message.split(" ");
+  console.log(message);
+  if (command[0] == "start") {
+    onstart(socket);
+  }
+  if (command[0] == "player") {
+    playerRequest(command[1], command[2]);
+  }
+  if (command[0] == "place") {
+    place({ x: Number(command[1]), y: Number(command[2]) });
+  }
 };

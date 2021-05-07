@@ -27,7 +27,8 @@ let lobbyPool = {
 function Lobby(id) {
   this.id = id;
   this.clients = [];
-  this.join = (ws) => {
+  this.connectedUsers = 0;
+  this.connect = (ws) => {
     this.clients.push(ws);
     let pingTimer = setInterval(() => {
       if (ws.readyState == 1) ws.ping();
@@ -40,6 +41,9 @@ function Lobby(id) {
     ws.on("close", () => {
       console.log(`client leave from lobby ${id}`);
     });
+  };
+  this.join = () => {
+    this.connectedUsers++;
   };
   this.send = (message, ws) => {
     //when have ws argument, then send everyone exept ws
