@@ -7,14 +7,14 @@ const app = express();
 const server = http.createServer(app);
 const webSocketServer = new WebSocket.Server({ server });
 
-app.use("/", express.static("dist"));
+app.use("/", express.static(__dirname + "/public/"));
 
 app.use("/id/:id", (req, res, next) => {
   let id = req.params["id"];
   if (id && lobby.isExist(id)) next();
   else res.redirect("/");
 });
-app.use("/id/:id", express.static("dist/lobby"));
+app.use("/id/:id", express.static(__dirname + "/public/lobby.html"));
 
 webSocketServer.on("connection", (ws, req) => {
   ws.on("message", (message) => {

@@ -1,0 +1,1 @@
+(()=>{var e=document.querySelector(".generate-url-button"),n=document.createElement("a"),t=new WebSocket("ws://"+window.location.host);e.addEventListener("click",(function(){t.send("newGame")})),t.onmessage=function(e){var o="id/"+e.data;n.innerText=window.location.href+o,n.setAttribute("href",o),document.body.append(n),t.close()}})();
