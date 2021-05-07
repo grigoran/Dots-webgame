@@ -1,5 +1,6 @@
 import { canvas, ctx } from "./init-canvas.js";
 import { dots } from "./dots.js";
+import { gameServer } from "../websocket.js";
 
 function map(val, beg, end) {
   let ret = val > end ? end : val;
@@ -42,6 +43,11 @@ class Field {
   placeDot(pos, color) {
     let newPos = this.getMeshCoord(pos);
     dots.push(newPos, color);
+    gameServer.place(newPos);
+  }
+  //use for place dot from remote server pos-mesh coord
+  placeDotDirect(pos, color) {
+    dots.push(pos, color);
   }
   getMeshCoord(pos) {
     return {

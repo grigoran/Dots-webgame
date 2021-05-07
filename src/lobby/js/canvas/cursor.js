@@ -1,6 +1,6 @@
 import { Vector } from "./vector.js";
 import { canvas, ctx } from "./init-canvas.js";
-import { localPlayerNickname, localPlayerColor } from "../welcome-form.js";
+import { player } from "../welcome-form.js";
 
 let nowRadius = 0;
 let animationProgress = 100;
@@ -20,7 +20,7 @@ function Cursor() {
   this.speed = 10;
   this.draw = function () {
     ctx.beginPath();
-    ctx.fillStyle = localPlayerColor;
+    ctx.fillStyle = player.local.color;
     ctx.arc(cursor.pos.x, cursor.pos.y, nowRadius, 0, 2 * Math.PI);
     ctx.fill();
   };

@@ -1,7 +1,21 @@
 import { Stage } from "./stage.js";
 
-import { localPlayerColor } from "../../welcome-form.js";
+import { player } from "../../welcome-form.js";
 import { canvas, ctx } from "../init-canvas.js";
+import { gameServer } from "../../websocket.js";
+
+let loaded = false;
+
+gameServer.onStart((socket) => {
+  socket.send(`player ${player.local.color} ${player.local.nickname}`);
+  loaded = true;
+});
+
+gameServer.onPlayerRequest((color, nick) => {
+  player.remote.color = color;
+  player.remote.nickname = nick;
+  console.log(player.remote);
+});
 
 export class GameLoading extends Stage {
   #screenWidth = canvas.width;
@@ -18,7 +32,7 @@ export class GameLoading extends Stage {
   }
 
   update(deltaTime) {
-    ctx.fillStyle = localPlayerColor;
+    ctx.fillStyle = player.local.color;
     for (let i = 0; i < this.#circleCount; ++i) {
       ctx.beginPath();
       let angle = this.#getAngle(this.#offset + i * 0.1);
@@ -32,7 +46,7 @@ export class GameLoading extends Stage {
       ctx.fill();
     }
     this.#offset += this.#speed * deltaTime;
-    if (this.#offset >= Math.PI / 4) {
+    if (loaded) {
       if (this.#nowAlpha > 0) this.#nowAlpha -= this.#speed * deltaTime;
       this.#nowAlpha < 0
         ? (ctx.globalAlpha = 0)

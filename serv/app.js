@@ -38,13 +38,13 @@ webSocketServer.on("connection", (ws, req) => {
         nowLobby.join(ws);
         ws.send("connected");
         if (nowLobby.clients.length == 2) nowLobby.send("start");
+        //nowLobby.send("start");
       } else {
         ws.send("full");
         ws.close();
       }
     }
-    if (command[0] == "color") lobby.getLobby(id).send(message, ws);
-    if (command[0] == "nick") lobby.getLobby(id).send(message, ws);
+    if (command[0] == "player") lobby.getLobby(id).send(message, ws);
     if (command[0] == "place") lobby.getLobby(id).send(message, ws);
   });
 });

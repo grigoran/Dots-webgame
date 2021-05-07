@@ -1,8 +1,11 @@
 import "../css/welcome-popup.css";
 import { startGame } from "./canvas/canvas.js";
+import { gameServer } from "./websocket";
 
-export let localPlayerColor;
-export let localPlayerNickname;
+export let player = {
+  local: {},
+  remote: {},
+};
 
 let popupForm = createFormElement();
 let popup = createPopupElement(popupForm);
@@ -19,11 +22,12 @@ function loadHandler() {
 
 function welcomeFormSubmit(event) {
   if (popup.classList.contains("welcome-popup_shown")) {
-    localPlayerColor = popupForm.color.value;
-    localPlayerNickname = popupForm.nickname.value;
-    if (localPlayerNickname == "")
-      localPlayerNickname = popupForm.nickname.placeholder;
+    player.local.color = popupForm.color.value;
+    player.local.nickname = popupForm.nickname.value;
+    if (player.local.nickname == "")
+      player.local.nickname = popupForm.nickname.placeholder;
     popup.classList.remove("welcome-popup_shown");
+    gameServer.join();
     startGame();
     setTimeout(() => popup.remove(), 150);
   }

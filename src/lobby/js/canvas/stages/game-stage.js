@@ -1,11 +1,17 @@
 import { canvas, ctx } from "./../init-canvas.js";
-import { localPlayerNickname, localPlayerColor } from "../../welcome-form.js";
+import { player } from "../../welcome-form.js";
 import { Stage } from "./stage.js";
 import { field } from "../field.js";
 import { Vector } from "../vector.js";
 import { cursor } from "../cursor.js";
+import { gameServer } from "../../websocket.js";
 
 let mousePos = new Vector();
+
+gameServer.onPlace((pos) => {
+  console.log(pos);
+  field.placeDotDirect(pos, player.remote.color);
+});
 
 function getMouseHandler() {
   let rect = canvas.getBoundingClientRect();
@@ -22,7 +28,7 @@ export class GameStage extends Stage {
     document.addEventListener("mousemove", getMouseHandler());
     document.addEventListener("click", () => {
       cursor.click();
-      field.placeDot(mousePos, localPlayerColor);
+      field.placeDot(mousePos, player.local.color);
     });
   }
   update(deltaTime) {
