@@ -32,17 +32,20 @@ webSocketServer.on("connection", (ws, req) => {
       }
       console.log(`incoming massage from lobby ${id}: ${message}`);
     }
-    if (command[0] == "join") {
+    if (command[0] == "con") {
       let nowLobby = lobby.getLobby(id);
       if (nowLobby.clients.length < 2) {
-        nowLobby.join(ws);
+        nowLobby.connect(ws);
         ws.send("connected");
-        if (nowLobby.clients.length == 2) nowLobby.send("start");
-        //nowLobby.send("start");
       } else {
         ws.send("full");
         ws.close();
       }
+    }
+    if (command[0] == "join") {
+      let nowLobby = lobby.getLobby(id);
+      nowLobby.join(ws);
+      if (nowLobby.connectedUsers == 2) nowLobby.send("start");
     }
     if (command[0] == "player") lobby.getLobby(id).send(message, ws);
     if (command[0] == "place") lobby.getLobby(id).send(message, ws);
