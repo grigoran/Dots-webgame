@@ -8,8 +8,15 @@ import { gameServer } from "../../websocket.js";
 
 let mousePos = new Vector();
 
+let localTurn = false; //ходит ли сейчас локальный игрок
+
 gameServer.onPlace((pos) => {
   field.placeDotDirect(pos, player.remote.color);
+  localTurn = true;
+});
+
+gameServer.onTurn(() => {
+  localTurn = true;
 });
 
 function getMouseHandler() {
@@ -26,8 +33,10 @@ export class GameStage extends Stage {
   init() {
     document.addEventListener("mousemove", getMouseHandler());
     document.addEventListener("click", () => {
-      cursor.click();
-      field.placeDot(mousePos, player.local.color);
+      if (localTurn) {
+        cursor.click();
+        if (field.placeDot(mousePos, player.local.color)) localTurn = false;
+      }
     });
   }
   update(deltaTime) {

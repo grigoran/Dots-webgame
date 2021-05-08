@@ -45,7 +45,7 @@ webSocketServer.on("connection", (ws, req) => {
     if (command[0] == "join") {
       let nowLobby = lobby.getLobby(id);
       nowLobby.join(ws);
-      if (nowLobby.connectedUsers == 2) nowLobby.send("start");
+      if (nowLobby.connectedUsers == 2) nowLobby.start();
     }
     if (command[0] == "player") lobby.getLobby(id).send(message, ws);
     if (command[0] == "place") lobby.getLobby(id).send(message, ws);

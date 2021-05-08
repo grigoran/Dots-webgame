@@ -52,6 +52,13 @@ function Lobby(id) {
       if (client != ws) client.send(message);
     });
   };
+  this.start = () => {
+    this.clients.forEach((client) => {
+      if (client.readyState != 1) return;
+      client.send("start");
+    });
+    this.clients[parseInt(Math.random() * 2)].send("turn");
+  };
 }
 
 module.exports = lobbyPool;

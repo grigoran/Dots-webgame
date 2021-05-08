@@ -42,12 +42,14 @@ class Field {
   }
   placeDot(pos, color) {
     let newPos = this.getMeshCoord(pos);
-    dots.push(newPos, color);
-    gameServer.place(newPos);
+    if (dots.push(newPos, color)) {
+      gameServer.place(newPos);
+      return true;
+    } else return false;
   }
   //use for place dot from remote server pos-mesh coord
   placeDotDirect(pos, color) {
-    dots.push(pos, color);
+    return dots.push(pos, color);
   }
   getMeshCoord(pos) {
     return {

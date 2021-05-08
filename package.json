@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.prod.js",
-    "deploy": "git subtree push --prefix=serv origin deploy",
+    "deploy": "git subtree push --prefix=serv origin deploy --squash",
     "start": "webpack --config webpack.dev.js --watch & nodemon serv/app.js",
     "app": "nodemon serv/app.js"
   },
