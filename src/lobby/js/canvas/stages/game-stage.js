@@ -9,7 +9,6 @@ import { gameServer } from "../../websocket.js";
 let mousePos = new Vector();
 
 gameServer.onPlace((pos) => {
-  console.log(pos);
   field.placeDotDirect(pos, player.remote.color);
 });
 

@@ -8,14 +8,15 @@ function Dot() {
   this.connected = false;
 }
 
-function DotArr(size) {
+function DotArr(meshSize) {
   let arr = [];
-  for (let i = 0; i < size.x; i++) {
+  for (let i = 0; i < meshSize.x; i++) {
     arr[i] = [];
-    for (let j = 0; j < size.y; j++) {
+    for (let j = 0; j < meshSize.y; j++) {
       arr[i][j] = new Dot();
     }
   }
+  this.size = meshSize;
   this.getColor = function (pos) {
     return arr[pos.x][pos.y].color;
   };

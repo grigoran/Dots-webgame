@@ -31,7 +31,6 @@ socket.onopen = function (e) {
 socket.onmessage = (event) => {
   let message = event.data;
   let command = message.split(" ");
-  console.log(message);
   if (command[0] == "start") {
     onstart(socket);
   }

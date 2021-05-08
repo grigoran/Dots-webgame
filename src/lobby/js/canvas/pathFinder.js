@@ -6,25 +6,41 @@ let color = "";
 let candidatePaths = [];
 
 function nextPos(dir, pos) {
-  let newPos = {};
+  let newPos;
   switch (dir) {
     case 0:
-      return new Vector(pos.x + 1, pos.y);
+      newPos = new Vector(pos.x + 1, pos.y);
+      break;
     case 1:
-      return new Vector(pos.x + 1, pos.y + 1);
+      newPos = new Vector(pos.x + 1, pos.y + 1);
+      break;
     case 2:
-      return new Vector(pos.x, pos.y + 1);
+      newPos = new Vector(pos.x, pos.y + 1);
+      break;
     case 3:
-      return new Vector(pos.x - 1, pos.y + 1);
+      newPos = new Vector(pos.x - 1, pos.y + 1);
+      break;
     case 4:
-      return new Vector(pos.x - 1, pos.y);
+      newPos = new Vector(pos.x - 1, pos.y);
+      break;
     case 5:
-      return new Vector(pos.x - 1, pos.y - 1);
+      newPos = new Vector(pos.x - 1, pos.y - 1);
+      break;
     case 6:
-      return new Vector(pos.x, pos.y - 1);
+      newPos = new Vector(pos.x, pos.y - 1);
+      break;
     case 7:
-      return new Vector(pos.x + 1, pos.y - 1);
+      newPos = new Vector(pos.x + 1, pos.y - 1);
+      break;
   }
+  if (
+    newPos.x < 0 ||
+    newPos.x >= dotArr.size.x ||
+    newPos.y < 0 ||
+    newPos.y >= dotArr.size.y
+  )
+    return undefined;
+  return newPos;
 }
 
 let findPath = function (pos) {
@@ -53,7 +69,7 @@ function recurcivePath(pos, path, prevPos) {
   path.push(pos);
   for (let i = 0; i < 8; i++) {
     next = nextPos(i, pos);
-    if (next.x == prevPos.x && next.y == prevPos.y) continue;
+    if (!next || (next.x == prevPos.x && next.y == prevPos.y)) continue;
     if (
       dotArr.getColor(next) == color &&
       !dotArr.isConnected(next) &&
