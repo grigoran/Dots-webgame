@@ -1,0 +1,53 @@
+.popup-frame {
+  position: absolute;
+  width: 250px;
+  margin: auto;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+
+  background-color: rgb(37, 46, 51);
+  border-radius: 20px;
+}
+
+.text-area {
+  margin-bottom: 15px;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  box-sizing: border-box;
+
+  background-color: whitesmoke;
+  font-weight: 500;
+  color: rgb(37, 46, 51);
+}
+.text-area:enabled {
+  outline: none;
+}
+
+.goto-button {
+  height: 40px;
+
+  transition: 125ms ease;
+  outline: none;
+
+  font-size: 14pt;
+  font-weight: 500;
+  color: rgb(37, 46, 51);
+  background-color: whitesmoke;
+  border: none;
+  border-radius: 5px;
+}
+
+.goto-button:hover {
+  opacity: 50%;
+}
+
+.goto-button:active {
+  transform: scale(0.75);
+}

@@ -1,0 +1,28 @@
+.button-wrapper {
+  margin: 0;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.generate-url-button {
+  height: 40px;
+
+  transition: 125ms ease;
+  outline: none;
+
+  font-size: 14pt;
+  font-weight: 500;
+  color: rgb(37, 46, 51);
+  background-color: whitesmoke;
+  border: none;
+  border-radius: 5px;
+}
+
+.generate-url-button:hover {
+  opacity: 50%;
+}
+
+.generate-url-button:active {
+  transform: scale(0.75);
+}

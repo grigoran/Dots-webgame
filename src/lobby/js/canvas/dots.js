@@ -48,8 +48,9 @@ class Dots {
     this.push = function (pos, color) {
       if (dotArr.getColor(pos) != "") return false;
       dotArr.setColor(pos, color);
-      let path = pathFinder.findPath(pos);
-      if (path.length > 0) this.#paths.push(path);
+      pathFinder.findPath(pos).then((path) => {
+        if (path.length > 0) this.#paths.push(path);
+      });
       return true;
     };
     this.draw = function () {

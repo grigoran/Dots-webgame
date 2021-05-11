@@ -1,5 +1,7 @@
+import "../css/gen-link.css";
+import { show as showPopup } from "./popup.js";
+
 let genButton = document.querySelector(".generate-url-button");
-let linkElem = document.createElement("a");
 
 let socket = new WebSocket("ws://" + window.location.host);
 
@@ -9,8 +11,7 @@ genButton.addEventListener("click", () => {
 
 socket.onmessage = function (event) {
   let lobbyId = "id/" + event.data;
-  linkElem.innerText = window.location.href + lobbyId;
-  linkElem.setAttribute("href", lobbyId);
-  document.body.append(linkElem);
+  let lobbyLink = window.location.href + lobbyId;
+  showPopup(lobbyLink);
   socket.close();
 };

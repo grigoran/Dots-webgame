@@ -44,19 +44,21 @@ function nextPos(dir, pos) {
 }
 
 let findPath = function (pos) {
-  startPos = new Vector(pos.x, pos.y);
-  color = dotArr.getColor(pos);
-  candidatePaths = [];
-  recurcivePath(startPos, [], startPos);
-  if (candidatePaths.length > 0) {
-    let pathIndex = maxAreaIndex(candidatePaths);
-    let result = [];
-    if (pathIndex >= 0) {
-      result = [...candidatePaths[pathIndex]];
-      markDotsAsConnected(result);
-    }
-    return result;
-  } else return [];
+  return new Promise((resolve, reject) => {
+    startPos = new Vector(pos.x, pos.y);
+    color = dotArr.getColor(pos);
+    candidatePaths = [];
+    recurcivePath(startPos, [], startPos);
+    if (candidatePaths.length > 0) {
+      let pathIndex = maxAreaIndex(candidatePaths);
+      let result = [];
+      if (pathIndex >= 0) {
+        result = [...candidatePaths[pathIndex]];
+        markDotsAsConnected(result);
+      }
+      resolve(result);
+    } else resolve([]);
+  });
 };
 
 /*В этом алгоритме присутствует проверка 3х последних эллементво во избеании замыкания*/
@@ -73,14 +75,14 @@ function recurcivePath(pos, path, prevPos) {
     if (
       dotArr.getColor(next) == color &&
       !dotArr.isConnected(next) &&
-      !findInLastFour(path, next)
+      !findIntersects(path, next)
     ) {
       recurcivePath(next, [...path], pos);
     }
   }
 }
 
-function findInLastFour(path, pos) {
+function findIntersects(path, pos) {
   for (let i = path.length - 1; i >= 1; --i) {
     if (pos.x == path[i].x && pos.y == path[i].y) {
       return true;

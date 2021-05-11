@@ -1,0 +1,25 @@
+body {
+  color: whitesmoke;
+  background-color: #1b1b25;
+  font-family: "Roboto";
+}
+
+.header__logo {
+  height: 30px;
+}
+
+.header {
+  max-width: 1400px;
+  margin: auto;
+  padding: 10px;
+}
+
+.canvas {
+  display: block;
+  width: 360px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
