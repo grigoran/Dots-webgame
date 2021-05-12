@@ -56,7 +56,9 @@ let findPath = function (pos) {
         result = [...candidatePaths[pathIndex]];
         markDotsAsConnected(result);
       }
-      resolve(result);
+      console.log(result);
+      console.log(simplifyPath(result));
+      resolve(simplifyPath(result));
     } else resolve([]);
   });
 };
@@ -139,6 +141,24 @@ function markDotsAsConnected(path) {
   for (let pos of path) {
     dotArr.connect(pos);
   }
+}
+
+//todo: return bounding box
+function simplifyPath(path) {
+  let result = [];
+  let direction = 4; //can be 5 2 1 0 3 6 7 8, 4 no direction
+  let nowDirection = 4;
+  for (let i = 0; i < path.length - 1; i++) {
+    let next = path[i + 1];
+    let pos = path[i];
+    nowDirection = next.x - pos.x + (next.y - pos.y) * 3 + 4;
+    if (nowDirection != direction) {
+      direction = nowDirection;
+      result.push(pos);
+    }
+  }
+  result.push(path[path.length - 1]);
+  return result;
 }
 
 let PathFinder = function () {

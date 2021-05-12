@@ -10,6 +10,8 @@ let mousePos = new Vector();
 
 let localTurn = false; //ходит ли сейчас локальный игрок
 
+const DEV_MODE = true;
+
 gameServer.onPlace((pos) => {
   field.placeDotDirect(pos, player.remote.color);
   localTurn = true;
@@ -33,7 +35,7 @@ export class GameStage extends Stage {
   init() {
     document.addEventListener("mousemove", getMouseHandler());
     document.addEventListener("click", () => {
-      if (localTurn) {
+      if (localTurn || DEV_MODE) {
         cursor.click();
         if (field.placeDot(mousePos, player.local.color)) localTurn = false;
       }

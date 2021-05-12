@@ -55,6 +55,26 @@ class Dots {
     };
     this.draw = function () {
       let color = "";
+      //draw paths
+      for (let path of this.#paths) {
+        ctx.beginPath();
+        ctx.strokeStyle = dotArr.getColor(path[0]);
+        ctx.fillStyle = dotArr.getColor(path[0]);
+        ctx.lineWidth = 3;
+        for (let pos of path) {
+          ctx.lineTo(
+            pos.x * this.#step + this.#step / 2,
+            pos.y * this.#step + this.#step / 2
+          );
+        }
+        ctx.closePath();
+        ctx.globalAlpha = 0.5;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+        ctx.stroke();
+      }
+
+      //draw dots
       for (let i = 0; i < this.#size.x; i++) {
         for (let j = 0; j < this.#size.y; j++) {
           color = dotArr.getColor({ x: i, y: j });
@@ -71,20 +91,24 @@ class Dots {
           ctx.fill();
         }
       }
-      //draw paths
+
+      //draw paths dots
       for (let path of this.#paths) {
-        ctx.beginPath();
-        ctx.strokeStyle = dotArr.getColor(path[0]);
-        ctx.lineWidth = 3;
         for (let pos of path) {
-          ctx.lineTo(
+          ctx.beginPath();
+          ctx.fillStyle = "black";
+          ctx.arc(
             pos.x * this.#step + this.#step / 2,
-            pos.y * this.#step + this.#step / 2
+            pos.y * this.#step + this.#step / 2,
+            8,
+            0,
+            TWO_PI
           );
+          ctx.closePath();
+          ctx.fill();
         }
-        ctx.closePath();
-        ctx.stroke();
       }
+      //###############
     };
   }
 }

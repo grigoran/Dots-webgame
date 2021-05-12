@@ -7,11 +7,13 @@ const app = express();
 const server = http.createServer(app);
 const webSocketServer = new WebSocket.Server({ server });
 
+const REQUIRE_USERS_TO_START = 1; //1 for development, 2 for rellease
+
 app.use("/", express.static(__dirname + "/public/"));
 
 app.use("/id/:id", (req, res, next) => {
   let id = req.params["id"];
-  if (id && lobby.isExist(id)) next();
+  if (id && lobby.isExist(id) && lobby.getLobby(id).connectedUsers < 2) next();
   else res.redirect("/");
 });
 app.use("/id/:id", express.static(__dirname + "/public/lobby.html"));
@@ -45,7 +47,7 @@ webSocketServer.on("connection", (ws, req) => {
     if (command[0] == "join") {
       let nowLobby = lobby.getLobby(id);
       nowLobby.join(ws);
-      if (nowLobby.connectedUsers == 2) nowLobby.start();
+      if (nowLobby.connectedUsers == REQUIRE_USERS_TO_START) nowLobby.start();
     }
     if (command[0] == "player") lobby.getLobby(id).send(message, ws);
     if (command[0] == "place") lobby.getLobby(id).send(message, ws);

@@ -57,7 +57,7 @@ function Lobby(id) {
       if (client.readyState != 1) return;
       client.send("start");
     });
-    this.clients[parseInt(Math.random() * 2)].send("turn");
+    this.clients[parseInt(Math.random() * this.clients.length)].send("turn");
   };
 }
 
