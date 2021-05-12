@@ -91,24 +91,6 @@ class Dots {
           ctx.fill();
         }
       }
-
-      //draw paths dots
-      for (let path of this.#paths) {
-        for (let pos of path) {
-          ctx.beginPath();
-          ctx.fillStyle = "black";
-          ctx.arc(
-            pos.x * this.#step + this.#step / 2,
-            pos.y * this.#step + this.#step / 2,
-            8,
-            0,
-            TWO_PI
-          );
-          ctx.closePath();
-          ctx.fill();
-        }
-      }
-      //###############
     };
   }
 }

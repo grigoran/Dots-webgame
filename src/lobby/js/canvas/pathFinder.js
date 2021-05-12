@@ -56,8 +56,9 @@ let findPath = function (pos) {
       if (pathIndex >= 0) {
         result = [...candidatePaths[pathIndex]];
         markDotsAsConnected(result);
+        result = pathWorker.simplifyPath(result);
       }
-      resolve(pathWorker.simplifyPath(result));
+      resolve(result);
     } else resolve([]);
   });
 };
