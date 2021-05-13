@@ -57,8 +57,9 @@ let findPath = function (pos) {
         result = [...candidatePaths[pathIndex]];
         markDotsAsConnected(result);
         result = pathWorker.simplifyPath(result);
+        markDotsInsidePath(result);
       }
-      resolve(result);
+      resolve(result.path);
     } else resolve([]);
   });
 };
@@ -87,6 +88,22 @@ function recurcivePath(pos, path, prevPos) {
 function markDotsAsConnected(path) {
   for (let pos of path) {
     dotArr.connect(pos);
+  }
+}
+
+//IMPORTANT in this function, path is object with boundings and optimized path fields
+function markDotsInsidePath(polygon) {
+  let pos = new Vector();
+  let color = dotArr.getColor(polygon.path[0]);
+  for (let i = polygon.bounding.min.x; i < polygon.bounding.max.x; i++) {
+    for (let j = polygon.bounding.min.y; j < polygon.bounding.max.y; j++) {
+      pos.x = i;
+      pos.y = j;
+      if (dotArr.getColor(pos) == color) continue;
+      if (pathWorker.isInsidePath(polygon.path, pos)) {
+        dotArr.markInside(pos);
+      }
+    }
   }
 }
 

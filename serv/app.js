@@ -7,7 +7,7 @@ const app = express();
 const server = http.createServer(app);
 const webSocketServer = new WebSocket.Server({ server });
 
-const REQUIRE_USERS_TO_START = 1; //1 for development, 2 for rellease
+const REQUIRE_USERS_TO_START = 2; //1 for development, 2 for rellease
 
 app.use("/", express.static(__dirname + "/public/"));
 

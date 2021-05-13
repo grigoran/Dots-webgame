@@ -6,6 +6,7 @@ const TWO_PI = 2 * Math.PI;
 function Dot() {
   this.color = "";
   this.connected = false;
+  this.inside = false;
 }
 
 function DotArr(meshSize) {
@@ -29,6 +30,12 @@ function DotArr(meshSize) {
   this.isConnected = function (pos) {
     return arr[pos.x][pos.y].connected;
   };
+  this.markInside = function (pos) {
+    arr[pos.x][pos.y].inside = true;
+  };
+  this.isInside = function (pos) {
+    return arr[pos.x][pos.y].inside;
+  };
 }
 
 let dotArr = {};
@@ -46,7 +53,7 @@ class Dots {
       pathFinder.assignArr(dotArr);
     };
     this.push = function (pos, color) {
-      if (dotArr.getColor(pos) != "") return false;
+      if (dotArr.getColor(pos) != "" || dotArr.isInside(pos)) return false;
       dotArr.setColor(pos, color);
       pathFinder.findPath(pos).then((path) => {
         if (path.length > 0) this.#paths.push(path);

@@ -56,9 +56,20 @@ export function simplifyPath(path) {
   let result = [];
   let direction = 4; //can be 5 2 1 0 3 6 7 8, 4 no direction
   let nowDirection = 4;
+
+  let bounding = {
+    min: { x: path[0].x, y: path[0].y },
+    max: { x: path[0].x, y: path[0].y },
+  };
   for (let i = 0; i < path.length - 1; i++) {
     let next = path[i + 1];
     let pos = path[i];
+
+    if (pos.x < bounding.min.x) bounding.min.x = pos.x;
+    if (pos.y < bounding.min.y) bounding.min.y = pos.y;
+    if (pos.x > bounding.max.x) bounding.max.x = pos.x;
+    if (pos.y > bounding.max.y) bounding.max.y = pos.y;
+
     nowDirection = next.x - pos.x + (next.y - pos.y) * 3 + 4;
     if (nowDirection != direction) {
       direction = nowDirection;
@@ -66,5 +77,29 @@ export function simplifyPath(path) {
     }
   }
   result.push(path[path.length - 1]);
-  return result;
+  return { path: result, bounding, source: path };
+}
+export function isInsidePath(path, pos) {
+  let horLineY = pos.y + 0.5;
+  let intersects = 0;
+  let now;
+  let next;
+  for (let i = 0; i < path.length; i++) {
+    if (i == path.length - 1) {
+      now = path[i];
+      next = path[0];
+    } else {
+      now = path[i];
+      next = path[i + 1];
+    }
+    let interX =
+      ((horLineY - now.y) * (next.x - now.x)) / (next.y - now.y) + now.x;
+    if (interX < pos.x) continue;
+
+    let deltaA = horLineY - now.y;
+    let deltaB = horLineY - next.y;
+    if (deltaA == 0 || deltaB == 0) intersects++;
+    if (Math.sign(deltaA) != Math.sign(deltaB)) intersects++;
+  }
+  return intersects % 2 == 1 ? true : false;
 }
