@@ -21,4 +21,5 @@ export function show(addres) {
   popupFrame.append(textArea, gotoButton);
 
   document.body.append(popupFrame);
+  gotoButton.focus();
 }
