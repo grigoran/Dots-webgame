@@ -53,11 +53,12 @@ function Lobby(id) {
     });
   };
   this.start = () => {
+    let firstTurn = this.clients[parseInt(Math.random() * this.clients.length)];
     this.clients.forEach((client) => {
       if (client.readyState != 1) return;
       client.send("start");
+      client.send(client == firstTurn ? "turn local" : "turn remote");
     });
-    this.clients[parseInt(Math.random() * this.clients.length)].send("turn");
   };
 }
 
