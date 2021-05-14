@@ -62,8 +62,10 @@ class Dots {
     };
     this.draw = function () {
       let color = "";
+
       //draw paths
-      for (let path of this.#paths) {
+      for (let i = this.#paths.length - 1; i >= 0; i--) {
+        let path = this.#paths[i];
         ctx.beginPath();
         ctx.strokeStyle = dotArr.getColor(path[0]);
         ctx.fillStyle = dotArr.getColor(path[0]);
@@ -75,11 +77,12 @@ class Dots {
           );
         }
         ctx.closePath();
-        ctx.globalAlpha = 0.5;
+        ctx.globalAlpha = 0.3;
         ctx.fill();
         ctx.globalAlpha = 1;
         ctx.stroke();
       }
+      //#######################
 
       //draw dots
       for (let i = 0; i < this.#size.x; i++) {
@@ -98,6 +101,7 @@ class Dots {
           ctx.fill();
         }
       }
+      //#######################
     };
   }
 }
