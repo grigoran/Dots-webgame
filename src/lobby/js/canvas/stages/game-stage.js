@@ -40,6 +40,7 @@ function getMouseHandler() {
 
 export class GameStage extends Stage {
   init() {
+    gameUi.init(localTurn);
     document.addEventListener("mousemove", getMouseHandler());
     document.addEventListener("click", () => {
       if (localTurn || DEV_MODE) {
@@ -50,7 +51,6 @@ export class GameStage extends Stage {
         }
       }
     });
-    gameUi.init(localTurn);
   }
   update(deltaTime) {
     field.drawField();

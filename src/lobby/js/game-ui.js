@@ -1,5 +1,13 @@
 import { player } from "./welcome-form.js";
 import "../css/game-ui.css";
+
+let nowTurn = document.createElement("div");
+nowTurn.classList.add("now-turn");
+let nowTurnText = document.createElement("p");
+nowTurnText.classList.add("now-turn__text");
+nowTurnText.innerText = "Сейчас ходит:";
+nowTurn.append(nowTurnText);
+
 let turnContainer = document.createElement("div");
 turnContainer.classList.add("turn-container");
 
@@ -9,7 +17,7 @@ localPlayerElement.classList.add("turn-container__player");
 let remotePlayerElement = document.createElement("p");
 remotePlayerElement.classList.add("turn-container__player");
 
-document.body.append(turnContainer);
+nowTurn.append(turnContainer);
 
 export function setTurn(localTurn) {
   if (localTurn) {
@@ -30,6 +38,7 @@ export function setTurn(localTurn) {
 }
 
 export function init(localTurn) {
+  document.querySelector(".header__logo").after(nowTurn);
   localPlayerElement.innerText = player.local.nickname;
   localPlayerElement.style.color = player.local.color;
 

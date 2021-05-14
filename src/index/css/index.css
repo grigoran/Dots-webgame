@@ -5,13 +5,13 @@ body {
 }
 
 .header__logo {
-  height: 30px;
+  height: 25px;
 }
 
 .header {
   max-width: 1400px;
   margin: auto;
-  padding: 10px;
+  padding: 5px;
 }
 
 .canvas {
