@@ -5,7 +5,7 @@ let socket = new WebSocket(
 let onstart = function (socket) {};
 let playerRequest = function (color, nick) {};
 let place = function (pos) {};
-let changeTurn = function () {};
+let changeTurn = function (turn) {};
 
 export let gameServer = {
   onStart(callback) {
@@ -45,6 +45,6 @@ socket.onmessage = (event) => {
     place({ x: Number(command[1]), y: Number(command[2]) });
   }
   if (command[0] == "turn") {
-    changeTurn();
+    changeTurn(command[1]);
   }
 };

@@ -5,20 +5,27 @@ import { field } from "../field.js";
 import { Vector } from "../vector.js";
 import { cursor } from "../cursor.js";
 import { gameServer } from "../../websocket.js";
+import * as gameUi from "../../game-ui.js";
 
 let mousePos = new Vector();
 
 let localTurn = false; //ходит ли сейчас локальный игрок
 
-const DEV_MODE = true;
+const DEV_MODE = false;
 
 gameServer.onPlace((pos) => {
   field.placeDotDirect(pos, player.remote.color);
   localTurn = true;
+  gameUi.setTurn(localTurn);
 });
 
-gameServer.onTurn(() => {
-  localTurn = true;
+gameServer.onTurn((turn) => {
+  console.log(turn);
+  if (turn == "local") {
+    localTurn = true;
+  } else {
+    localTurn = false;
+  }
 });
 
 function getMouseHandler() {
@@ -37,9 +44,13 @@ export class GameStage extends Stage {
     document.addEventListener("click", () => {
       if (localTurn || DEV_MODE) {
         cursor.click();
-        if (field.placeDot(mousePos, player.local.color)) localTurn = false;
+        if (field.placeDot(mousePos, player.local.color)) {
+          localTurn = DEV_MODE ? !localTurn : false;
+          gameUi.setTurn(localTurn);
+        }
       }
     });
+    gameUi.init(localTurn);
   }
   update(deltaTime) {
     field.drawField();

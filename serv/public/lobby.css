@@ -517,3 +517,24 @@ body {
   transform: scale(0.75);
 }
 
+.turn-container {
+  width: fit-content;
+  margin: auto;
+
+  height: 25px;
+  overflow: hidden;
+
+  font-size: 14pt;
+
+  text-align: center;
+}
+
+.turn-container__player {
+  margin-top: 0;
+  transition: 250ms ease;
+}
+
+.turn-container__player_hidden {
+  margin-top: -28pt;
+}
+
