@@ -78,6 +78,7 @@ function recurcivePath(pos, path, prevPos) {
     if (
       dotArr.getColor(next) == color &&
       !dotArr.isConnected(next) &&
+      !dotArr.isInside(next) &&
       !pathWorker.findIntersects(path, next)
     ) {
       recurcivePath(next, [...path], pos);
@@ -99,7 +100,7 @@ function markDotsInsidePath(polygon) {
     for (let j = polygon.bounding.min.y; j < polygon.bounding.max.y; j++) {
       pos.x = i;
       pos.y = j;
-      if (dotArr.getColor(pos) == color) continue;
+      if (dotArr.isConnected(pos)) continue;
       if (pathWorker.isInsidePath(polygon.path, pos)) {
         dotArr.markInside(pos);
       }

@@ -10,7 +10,7 @@ let mousePos = new Vector();
 
 let localTurn = false; //ходит ли сейчас локальный игрок
 
-const DEV_MODE = false;
+const DEV_MODE = true;
 
 gameServer.onPlace((pos) => {
   field.placeDotDirect(pos, player.remote.color);
