@@ -2,9 +2,31 @@ import "../css/welcome-popup.css";
 import { startGame } from "./canvas/canvas.js";
 import { gameServer } from "./websocket";
 
+const RAND_NICKNAMES = [
+  "Щас бы на дачу",
+  "SuperDominator",
+  "Placeholder",
+  "Плейсхолдер",
+  "Что-то грустно",
+  "За шо",
+  "Твое имя",
+  "Petr",
+  "Паравозик томас",
+  "Alukard",
+  "Милый кисик",
+  "Доброжелатель",
+];
+
+function getRandNick() {
+  return RAND_NICKNAMES[Math.floor(Math.random() * RAND_NICKNAMES.length)];
+}
+
 export let player = {
   local: {},
-  remote: {},
+  remote: {
+    color: "pink",
+    nickname: getRandNick(),
+  },
 };
 
 let popupForm = createFormElement();
@@ -49,7 +71,7 @@ function createFormElement() {
     class="welcome-popup__nickname-field"
     type="text"
     name="nickname"
-    placeholder="плейсхолдер"
+    placeholder="${getRandNick()}"
     autocomplete="off"
     autofocus="autofocus"
   />`;
