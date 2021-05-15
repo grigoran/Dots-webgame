@@ -27,3 +27,20 @@
 .turn-container__player_hidden {
   margin-top: -28pt;
 }
+
+.player-score-wrapper {
+  display: flex;
+  width: 360px;
+  justify-content: space-between;
+  margin: auto;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.player-score {
+  margin-right: 10px;
+  padding: 2px;
+  border-radius: 5px;
+  border-width: 2px;
+  border-style: solid;
+}

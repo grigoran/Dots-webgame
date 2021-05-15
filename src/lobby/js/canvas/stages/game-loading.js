@@ -14,7 +14,6 @@ gameServer.onStart((socket) => {
 gameServer.onPlayerRequest((color, nick) => {
   player.remote.color = color;
   player.remote.nickname = nick;
-  console.log(player.remote);
 });
 
 export class GameLoading extends Stage {

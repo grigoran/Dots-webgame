@@ -3,29 +3,34 @@ import { startGame } from "./canvas/canvas.js";
 import { gameServer } from "./websocket";
 
 const RAND_NICKNAMES = [
-  "Щас бы на дачу",
+  "Щас_бы_на_дачу",
   "SuperDominator",
   "Placeholder",
   "Плейсхолдер",
-  "Что-то грустно",
-  "За шо",
-  "Твое имя",
+  "Что-то_грустно",
+  "За_шо",
+  "Твое_имя",
   "Petr",
-  "Паравозик томас",
+  "Паравозик_томас",
   "Alukard",
-  "Милый кисик",
+  "Милый_кисик",
   "Доброжелатель",
+  "Абонент",
 ];
 
 function getRandNick() {
   return RAND_NICKNAMES[Math.floor(Math.random() * RAND_NICKNAMES.length)];
 }
 
+//scrore считается в pathFinder
 export let player = {
-  local: {},
+  local: {
+    score: 0,
+  },
   remote: {
     color: "pink",
     nickname: getRandNick(),
+    score: 0,
   },
 };
 

@@ -1,5 +1,6 @@
 import { Vector } from "./vector.js";
 import * as pathWorker from "./pathWorker.js";
+import { player } from "../welcome-form.js";
 
 let dotArr = {};
 let startPos = new Vector();
@@ -96,12 +97,29 @@ function markDotsAsConnected(path) {
 function markDotsInsidePath(polygon) {
   let pos = new Vector();
   let color = dotArr.getColor(polygon.path[0]);
+  let localPlayer = color == player.local.color;
   for (let i = polygon.bounding.min.x; i < polygon.bounding.max.x; i++) {
     for (let j = polygon.bounding.min.y; j < polygon.bounding.max.y; j++) {
       pos.x = i;
       pos.y = j;
-      if (dotArr.isConnected(pos)) continue;
+      let nowColor = dotArr.getColor(pos);
+      if (dotArr.isConnected(pos) && nowColor == color) continue;
       if (pathWorker.isInsidePath(polygon.path, pos)) {
+        if (
+          localPlayer &&
+          nowColor != color &&
+          nowColor != "" &&
+          !dotArr.isInside(pos)
+        ) {
+          player.local.score += 1;
+        } else if (
+          !localPlayer &&
+          nowColor != color &&
+          nowColor != "" &&
+          !dotArr.isInside(pos)
+        ) {
+          player.remote.score += 1;
+        }
         dotArr.markInside(pos);
       }
     }
