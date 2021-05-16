@@ -68,7 +68,7 @@ let findPath = function (pos) {
     let result = [];
     recurcivePath(startPos, [], startPos, 0);
     if (candidatePaths.length > 0) {
-      candidatePaths = filterCanditates();
+      //candidatePaths = filterCanditates();
       let pathIndex = pathWorker.maxAreaIndex(candidatePaths);
       if (pathIndex >= 0) {
         result = [...candidatePaths[pathIndex]];
@@ -76,21 +76,23 @@ let findPath = function (pos) {
         result = pathWorker.simplifyPath(result);
         markDotsInsidePath(result);
       }
+      console.log(result.path.length);
       resolve(result.path);
     } else resolve(result);
   });
 };
 
-/*В этом алгоритме присутствует проверка всеъ эллементов во избеании замыкания*/
-//TODO: добавлять пути в которых меньше законечненных точек
+/*В этом алгоритме присутствует проверка всех эллементов во избеании замыкания. Это нужно убрать*/
 
 function recurcivePath(pos, path, prevPos, connectedDotsCount) {
   let next;
+
   if (path.length != 0 && pos.x == startPos.x && pos.y == startPos.y) {
     candidatePaths.push([...path]);
     connectedDots.push(connectedDotsCount);
     return;
   }
+
   path.push(pos);
   for (let i = 0; i < 8; i++) {
     next = nextPos(i, pos);
@@ -128,22 +130,12 @@ function markDotsInsidePath(polygon) {
       let nowColor = dotArr.getColor(pos);
       if (dotArr.isConnected(pos) && nowColor == color) continue;
       if (pathWorker.isInsidePath(polygon.path, pos)) {
-        if (
-          localPlayer &&
-          nowColor != color &&
-          nowColor != "" &&
-          !dotArr.isInside(pos)
-        ) {
-          player.local.score += 1;
-        } else if (
-          !localPlayer &&
-          nowColor != color &&
-          nowColor != "" &&
-          !dotArr.isInside(pos)
-        ) {
-          player.remote.score += 1;
+        dotArr.setColor(pos, "black");
+        if (nowColor != color && nowColor != "" && !dotArr.isInside(pos)) {
+          localPlayer ? (player.local.score += 1) : (player.remote.score += 1);
         }
         dotArr.markInside(pos);
+        dotArr.setColor(pos, "white");
       }
     }
   }

@@ -61,10 +61,11 @@ class Dots {
       return true;
     };
     this.drawPaths = function () {
-      for (let i = this.#paths.length - 1; i >= 0; i--) {
+      for (let i = 0; i < this.#paths.length; i++) {
         let path = this.#paths[i];
         ctx.beginPath();
         ctx.strokeStyle = dotArr.getColor(path[0]);
+        if (i == this.#paths.length - 1) ctx.strokeStyle = "white";
         ctx.lineWidth = 3;
         for (let pos of path) {
           ctx.lineTo(
