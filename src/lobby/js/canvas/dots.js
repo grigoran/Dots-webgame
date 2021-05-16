@@ -56,19 +56,15 @@ class Dots {
       if (dotArr.getColor(pos) != "" || dotArr.isInside(pos)) return false;
       dotArr.setColor(pos, color);
       pathFinder.findPath(pos).then((path) => {
-        if (path.length > 0) this.#paths.push(path);
+        if (path && path.length > 0) this.#paths.push(path);
       });
       return true;
     };
-    this.draw = function () {
-      let color = "";
-
-      //draw paths
+    this.drawPaths = function () {
       for (let i = this.#paths.length - 1; i >= 0; i--) {
         let path = this.#paths[i];
         ctx.beginPath();
         ctx.strokeStyle = dotArr.getColor(path[0]);
-        ctx.fillStyle = dotArr.getColor(path[0]);
         ctx.lineWidth = 3;
         for (let pos of path) {
           ctx.lineTo(
@@ -77,17 +73,29 @@ class Dots {
           );
         }
         ctx.closePath();
-        ctx.globalAlpha = 0.3;
-        ctx.fill();
-        ctx.globalAlpha = 1;
         ctx.stroke();
       }
-      //#######################
-
-      //draw dots
+    };
+    this.fillPaths = function () {
+      //fill paths
+      for (let i = this.#paths.length - 1; i >= 0; i--) {
+        let path = this.#paths[i];
+        ctx.beginPath();
+        ctx.fillStyle = getFillColor(dotArr.getColor(path[0]));
+        for (let pos of path) {
+          ctx.lineTo(
+            pos.x * this.#step + this.#step / 2,
+            pos.y * this.#step + this.#step / 2
+          );
+        }
+        ctx.closePath();
+        ctx.fill();
+      }
+    };
+    this.drawDots = function () {
       for (let i = 0; i < this.#size.x; i++) {
         for (let j = 0; j < this.#size.y; j++) {
-          color = dotArr.getColor({ x: i, y: j });
+          let color = dotArr.getColor({ x: i, y: j });
           if (color == "") continue;
           ctx.beginPath();
           ctx.fillStyle = color;
@@ -101,9 +109,17 @@ class Dots {
           ctx.fill();
         }
       }
-      //#######################
     };
   }
+}
+
+function getFillColor(hex) {
+  let opacity = 0.5;
+  let rgb = hex
+    .match(/[a-f\d]{2}/gi)
+    .map((elem) => parseInt(elem, 16) * opacity)
+    .join(",");
+  return `rgb(${rgb})`;
 }
 
 export let dots = new Dots();

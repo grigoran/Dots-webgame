@@ -20,7 +20,6 @@ gameServer.onPlace((pos) => {
 });
 
 gameServer.onTurn((turn) => {
-  console.log(turn);
   if (turn == "local") {
     localTurn = true;
   } else {

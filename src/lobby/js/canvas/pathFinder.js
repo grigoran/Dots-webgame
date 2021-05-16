@@ -6,6 +6,7 @@ let dotArr = {};
 let startPos = new Vector();
 let color = "";
 let candidatePaths = [];
+let connectedDots = []; //count of connected dots for each canditate path
 
 function nextPos(dir, pos) {
   let newPos;
@@ -45,15 +46,30 @@ function nextPos(dir, pos) {
   return newPos;
 }
 
+//find condidates with minimal connected nodes
+function filterCanditates() {
+  let result = [];
+  let min = connectedDots[0];
+  for (let val of connectedDots) {
+    if (val < min) min = val;
+  }
+  for (let i = 0; i < connectedDots.length; i++) {
+    if (connectedDots[i] == min) result.push(candidatePaths[i]);
+  }
+  return result;
+}
+
 let findPath = function (pos) {
   return new Promise((resolve, reject) => {
     startPos = new Vector(pos.x, pos.y);
     color = dotArr.getColor(pos);
     candidatePaths = [];
-    recurcivePath(startPos, [], startPos);
+    connectedDots = [];
+    let result = [];
+    recurcivePath(startPos, [], startPos, 0);
     if (candidatePaths.length > 0) {
+      candidatePaths = filterCanditates();
       let pathIndex = pathWorker.maxAreaIndex(candidatePaths);
-      let result = [];
       if (pathIndex >= 0) {
         result = [...candidatePaths[pathIndex]];
         markDotsAsConnected(result);
@@ -61,15 +77,18 @@ let findPath = function (pos) {
         markDotsInsidePath(result);
       }
       resolve(result.path);
-    } else resolve([]);
+    } else resolve(result);
   });
 };
 
-/*В этом алгоритме присутствует проверка 3х последних эллементво во избеании замыкания*/
-function recurcivePath(pos, path, prevPos) {
+/*В этом алгоритме присутствует проверка всеъ эллементов во избеании замыкания*/
+//TODO: добавлять пути в которых меньше законечненных точек
+
+function recurcivePath(pos, path, prevPos, connectedDotsCount) {
   let next;
   if (path.length != 0 && pos.x == startPos.x && pos.y == startPos.y) {
     candidatePaths.push([...path]);
+    connectedDots.push(connectedDotsCount);
     return;
   }
   path.push(pos);
@@ -78,11 +97,15 @@ function recurcivePath(pos, path, prevPos) {
     if (!next || (next.x == prevPos.x && next.y == prevPos.y)) continue;
     if (
       dotArr.getColor(next) == color &&
-      !dotArr.isConnected(next) &&
       !dotArr.isInside(next) &&
       !pathWorker.findIntersects(path, next)
     ) {
-      recurcivePath(next, [...path], pos);
+      recurcivePath(
+        next,
+        [...path],
+        pos,
+        dotArr.isConnected(pos) ? connectedDotsCount + 1 : connectedDotsCount
+      );
     }
   }
 }

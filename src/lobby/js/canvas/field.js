@@ -34,10 +34,12 @@ class Field {
 
     //функция рисования поля
     this.drawField = function () {
+      dots.fillPaths();
       ctx.strokeStyle = "black";
       ctx.lineWidth = 2;
       ctx.stroke(path);
-      dots.draw();
+      dots.drawPaths();
+      dots.drawDots();
     };
   }
   placeDot(pos, color) {
