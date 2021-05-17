@@ -129,7 +129,6 @@ function markDotsInsidePath(polygon) {
       let nowColor = dotArr.getColor(pos);
       if (dotArr.isConnected(pos) && nowColor == color) continue;
       if (pathWorker.isInsidePath(polygon.path, pos)) {
-        dotArr.setColor(pos, "black");
         if (nowColor != color && nowColor != "" && !dotArr.isInside(pos)) {
           localPlayer ? (player.local.score += 1) : (player.remote.score += 1);
         }
