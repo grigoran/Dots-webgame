@@ -1,12 +1,3 @@
-export function findIntersects(path, pos) {
-  for (let i = path.length - 1; i >= 1; --i) {
-    if (pos.x == path[i].x && pos.y == path[i].y) {
-      return true;
-    }
-  }
-  return false;
-}
-
 export function maxAreaIndex(paths) {
   let nowArea = 0;
   let maxNodes = 0;

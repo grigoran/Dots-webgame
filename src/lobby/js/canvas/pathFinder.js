@@ -76,20 +76,18 @@ let findPath = function (pos) {
         result = pathWorker.simplifyPath(result);
         markDotsInsidePath(result);
       }
-      console.log(result.path.length);
       resolve(result.path);
     } else resolve(result);
   });
 };
 
-/*В этом алгоритме присутствует проверка всех эллементов во избеании замыкания. Это нужно убрать*/
-
 function recurcivePath(pos, path, prevPos, connectedDotsCount) {
   let next;
-
+  if (path.length != 0) dotArr.mark(pos);
   if (path.length != 0 && pos.x == startPos.x && pos.y == startPos.y) {
     candidatePaths.push([...path]);
     connectedDots.push(connectedDotsCount);
+    dotArr.unmark(pos);
     return;
   }
 
@@ -100,7 +98,7 @@ function recurcivePath(pos, path, prevPos, connectedDotsCount) {
     if (
       dotArr.getColor(next) == color &&
       !dotArr.isInside(next) &&
-      !pathWorker.findIntersects(path, next)
+      !dotArr.isMarked(next)
     ) {
       recurcivePath(
         next,
@@ -110,6 +108,7 @@ function recurcivePath(pos, path, prevPos, connectedDotsCount) {
       );
     }
   }
+  dotArr.unmark(pos);
 }
 
 function markDotsAsConnected(path) {
@@ -135,7 +134,7 @@ function markDotsInsidePath(polygon) {
           localPlayer ? (player.local.score += 1) : (player.remote.score += 1);
         }
         dotArr.markInside(pos);
-        dotArr.setColor(pos, "white");
+        //dotArr.setColor(pos, "white");
       }
     }
   }

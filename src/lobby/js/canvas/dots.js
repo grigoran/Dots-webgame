@@ -7,6 +7,7 @@ function Dot() {
   this.color = "";
   this.connected = false;
   this.inside = false;
+  this.marked = false;
 }
 
 function DotArr(meshSize) {
@@ -35,6 +36,15 @@ function DotArr(meshSize) {
   };
   this.isInside = function (pos) {
     return arr[pos.x][pos.y].inside;
+  };
+  this.mark = function (pos) {
+    arr[pos.x][pos.y].marked = true;
+  };
+  this.unmark = function (pos) {
+    arr[pos.x][pos.y].marked = false;
+  };
+  this.isMarked = function (pos) {
+    return arr[pos.x][pos.y].marked;
   };
 }
 
@@ -65,7 +75,7 @@ class Dots {
         let path = this.#paths[i];
         ctx.beginPath();
         ctx.strokeStyle = dotArr.getColor(path[0]);
-        if (i == this.#paths.length - 1) ctx.strokeStyle = "white";
+        //if (i == this.#paths.length - 1) ctx.strokeStyle = "white";
         ctx.lineWidth = 3;
         for (let pos of path) {
           ctx.lineTo(
@@ -116,6 +126,7 @@ class Dots {
 
 function getFillColor(hex) {
   let opacity = 0.5;
+  if (!hex) return "orange";
   let rgb = hex
     .match(/[a-f\d]{2}/gi)
     .map((elem) => parseInt(elem, 16) * opacity)
