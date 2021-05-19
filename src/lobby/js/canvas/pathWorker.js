@@ -1,35 +1,21 @@
 export function maxAreaIndex(paths) {
-  let nowArea = 0;
-  let maxNodes = 0;
+  let area = 0;
   let insideNodes = 0;
-  let indexes = [];
-  let areas = [];
+  let maxCof = 0; // inside nodes / area
+  let index = 0;
   for (let i = 0; i < paths.length; i++) {
-    nowArea = findArea(paths[i]);
-    if (nowArea <= 0) continue;
-    insideNodes = nowArea - paths[i].length / 2 + 1; //формула пика
-    if (insideNodes <= 0) continue;
-    if (insideNodes > maxNodes) {
-      maxNodes = insideNodes;
-      indexes = [i];
-      areas = [nowArea];
-    } else if (insideNodes == maxNodes) {
-      indexes.push(i);
-      areas.push(nowArea);
+    area = findArea(paths[i]);
+    if (area <= 0) continue;
+    insideNodes = area - paths[i].length / 2 + 1; //формула пика
+    if (insideNodes == 0) continue;
+    let cof = insideNodes / area;
+    if (cof > maxCof) {
+      maxCof = cof;
+      index = i;
     }
   }
-
-  if (maxNodes == 0) return -1;
-  if (indexes.length < 1) return -1;
-  let minArea = areas[0];
-  let resIndex = indexes[0];
-  for (let i = 1; i < indexes.length; i++) {
-    if (areas[i] < minArea) {
-      resIndex = indexes[i];
-      minArea = areas[i];
-    }
-  }
-  return resIndex;
+  //if (maxCof > 0) console.log(`res ${index} ` + maxCof);
+  return maxCof == 0 ? -1 : index;
 }
 
 function findArea(path) {

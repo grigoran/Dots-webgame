@@ -8,6 +8,8 @@ let color = "";
 let candidatePaths = [];
 let connectedDots = []; //count of connected dots for each canditate path
 
+let CONNECTED_DOTS_THRESHOLD = 1;
+
 function nextPos(dir, pos) {
   let newPos;
   switch (dir) {
@@ -48,14 +50,25 @@ function nextPos(dir, pos) {
 
 //find condidates with minimal connected nodes
 function filterCanditates() {
+  console.log(candidatePaths.length);
   let result = [];
-  let min = connectedDots[0];
-  for (let val of connectedDots) {
-    if (val < min) min = val;
+  let min = 0;
+  for (let i = 0; i < connectedDots.length; i++) {
+    if (connectedDots[i] > CONNECTED_DOTS_THRESHOLD && min == 0) {
+      min = connectedDots[i];
+    } else if (
+      connectedDots[i] > CONNECTED_DOTS_THRESHOLD &&
+      connectedDots[i] < min
+    ) {
+      min = connectedDots[i];
+    }
   }
   for (let i = 0; i < connectedDots.length; i++) {
     if (connectedDots[i] == min) result.push(candidatePaths[i]);
   }
+  console.log(
+    "cand: " + candidatePaths.length + " res:" + result.length + " min: " + min
+  );
   return result;
 }
 
@@ -66,7 +79,7 @@ let findPath = function (pos) {
     candidatePaths = [];
     connectedDots = [];
     let result = [];
-    recurcivePath(startPos, [], startPos, 0);
+    recurcivePath(startPos, [], 0);
     if (candidatePaths.length > 0) {
       //candidatePaths = filterCanditates();
       let pathIndex = pathWorker.maxAreaIndex(candidatePaths);
@@ -81,7 +94,7 @@ let findPath = function (pos) {
   });
 };
 
-function recurcivePath(pos, path, prevPos, connectedDotsCount) {
+function recurcivePath(pos, path, connectedDotsCount) {
   let next;
   if (path.length != 0) dotArr.mark(pos);
   if (path.length != 0 && pos.x == startPos.x && pos.y == startPos.y) {
@@ -94,16 +107,15 @@ function recurcivePath(pos, path, prevPos, connectedDotsCount) {
   path.push(pos);
   for (let i = 0; i < 8; i++) {
     next = nextPos(i, pos);
-    if (!next || (next.x == prevPos.x && next.y == prevPos.y)) continue;
+    if (!next) continue;
     if (
+      !dotArr.isMarked(next) &&
       dotArr.getColor(next) == color &&
-      !dotArr.isInside(next) &&
-      !dotArr.isMarked(next)
+      !dotArr.isInside(next)
     ) {
       recurcivePath(
         next,
         [...path],
-        pos,
         dotArr.isConnected(pos) ? connectedDotsCount + 1 : connectedDotsCount
       );
     }
