@@ -1,5 +1,7 @@
 import { canvas, ctx } from "./init-canvas.js";
 import { pathFinder } from "./pathFinder.js";
+import { dotGroups } from "./dotGroups.js";
+import { Vector } from "./vector.js";
 
 const TWO_PI = 2 * Math.PI;
 
@@ -8,6 +10,38 @@ function Dot() {
   this.connected = false;
   this.inside = false;
   this.marked = false;
+  this.group = -1;
+}
+
+function getNextPos(dir, pos) {
+  let newPos;
+  switch (dir) {
+    case 0:
+      newPos = new Vector(pos.x + 1, pos.y);
+      break;
+    case 1:
+      newPos = new Vector(pos.x + 1, pos.y - 1);
+      break;
+    case 2:
+      newPos = new Vector(pos.x, pos.y - 1);
+      break;
+    case 3:
+      newPos = new Vector(pos.x - 1, pos.y - 1);
+      break;
+    case 4:
+      newPos = new Vector(pos.x - 1, pos.y);
+      break;
+    case 5:
+      newPos = new Vector(pos.x - 1, pos.y + 1);
+      break;
+    case 6:
+      newPos = new Vector(pos.x, pos.y + 1);
+      break;
+    case 7:
+      newPos = new Vector(pos.x + 1, pos.y + 1);
+      break;
+  }
+  return newPos;
 }
 
 function DotArr(meshSize) {
@@ -46,6 +80,24 @@ function DotArr(meshSize) {
   this.isMarked = function (pos) {
     return arr[pos.x][pos.y].marked;
   };
+  this.setGroup = function (pos, id) {
+    arr[pos.x][pos.y].group = id;
+  };
+  this.getGroup = function (pos) {
+    return arr[pos.x][pos.y].group;
+  };
+  this.nextPos = (dir, pos) => {
+    let newPos = getNextPos(dir, pos);
+    if (
+      newPos.x < 0 ||
+      newPos.x >= this.size.x ||
+      newPos.y < 0 ||
+      newPos.y >= this.size.y
+    ) {
+      return undefined;
+    }
+    return newPos;
+  };
 }
 
 let dotArr = {};
@@ -61,13 +113,14 @@ class Dots {
       this.#size = size;
       dotArr = new DotArr(size);
       pathFinder.assignArr(dotArr);
+      dotGroups.assignArr(dotArr);
     };
     this.push = function (pos, color) {
       if (dotArr.getColor(pos) != "" || dotArr.isInside(pos)) return false;
       dotArr.setColor(pos, color);
-      pathFinder.findPath(pos).then((path) => {
-        if (path && path.length > 0) this.#paths.push(path);
-      });
+      let path = dotGroups.addDot(pos);
+      //let path = pathFinder.findPath(pos);
+      if (path.length > 0) this.#paths.push(path);
       return true;
     };
     this.drawPaths = function () {

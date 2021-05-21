@@ -50,10 +50,10 @@ export class GameStage extends Stage {
         }
       }
     });
+    if (DEV_MODE) field.placeDotDirect({ x: 7, y: 7 }, "white");
   }
   update(deltaTime) {
     field.drawField();
-
     cursor.target = field.getTargetCoord(mousePos);
     cursor.pos.x += (cursor.target.x - cursor.pos.x) * deltaTime * cursor.speed;
     cursor.pos.y += (cursor.target.y - cursor.pos.y) * deltaTime * cursor.speed;

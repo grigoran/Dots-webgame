@@ -5,128 +5,46 @@ import { player } from "../welcome-form.js";
 let dotArr = {};
 let startPos = new Vector();
 let color = "";
-let candidatePaths = [];
-let connectedDots = []; //count of connected dots for each canditate path
-
-let CONNECTED_DOTS_THRESHOLD = 1;
-
-function nextPos(dir, pos) {
-  let newPos;
-  switch (dir) {
-    case 0:
-      newPos = new Vector(pos.x + 1, pos.y);
-      break;
-    case 1:
-      newPos = new Vector(pos.x + 1, pos.y + 1);
-      break;
-    case 2:
-      newPos = new Vector(pos.x, pos.y + 1);
-      break;
-    case 3:
-      newPos = new Vector(pos.x - 1, pos.y + 1);
-      break;
-    case 4:
-      newPos = new Vector(pos.x - 1, pos.y);
-      break;
-    case 5:
-      newPos = new Vector(pos.x - 1, pos.y - 1);
-      break;
-    case 6:
-      newPos = new Vector(pos.x, pos.y - 1);
-      break;
-    case 7:
-      newPos = new Vector(pos.x + 1, pos.y - 1);
-      break;
-  }
-  if (
-    newPos.x < 0 ||
-    newPos.x >= dotArr.size.x ||
-    newPos.y < 0 ||
-    newPos.y >= dotArr.size.y
-  )
-    return undefined;
-  return newPos;
-}
-
-//find condidates with minimal connected nodes
-function filterCanditates() {
-  console.log(candidatePaths.length);
-  let result = [];
-  let min = 0;
-  for (let i = 0; i < connectedDots.length; i++) {
-    if (connectedDots[i] > CONNECTED_DOTS_THRESHOLD && min == 0) {
-      min = connectedDots[i];
-    } else if (
-      connectedDots[i] > CONNECTED_DOTS_THRESHOLD &&
-      connectedDots[i] < min
-    ) {
-      min = connectedDots[i];
-    }
-  }
-  for (let i = 0; i < connectedDots.length; i++) {
-    if (connectedDots[i] == min) result.push(candidatePaths[i]);
-  }
-  console.log(
-    "cand: " + candidatePaths.length + " res:" + result.length + " min: " + min
-  );
-  return result;
-}
+let candidatePath = [];
 
 let findPath = function (pos) {
-  return new Promise((resolve, reject) => {
-    startPos = new Vector(pos.x, pos.y);
-    color = dotArr.getColor(pos);
-    candidatePaths = [];
-    connectedDots = [];
-    let result = [];
-    recurcivePath(startPos, [], 0);
-    if (candidatePaths.length > 0) {
-      //candidatePaths = filterCanditates();
-      let pathIndex = pathWorker.maxAreaIndex(candidatePaths);
-      if (pathIndex >= 0) {
-        result = [...candidatePaths[pathIndex]];
-        markDotsAsConnected(result);
-        result = pathWorker.simplifyPath(result);
-        markDotsInsidePath(result);
-      }
-      resolve(result.path);
-    } else resolve(result);
-  });
+  startPos = new Vector(pos.x, pos.y);
+  color = dotArr.getColor(pos);
+  candidatePath = [];
+  recurcivePath(startPos, [], 0);
+  if (candidatePath.length > 3) {
+    candidatePath = pathWorker.simplifyPath(candidatePath);
+    return candidatePath.path;
+  } else return [];
 };
 
-function recurcivePath(pos, path, connectedDotsCount) {
+//pos-current dot pos, path-current path, backdir-dir to prev dot
+function recurcivePath(pos, path, backdir) {
   let next;
   if (path.length != 0) dotArr.mark(pos);
   if (path.length != 0 && pos.x == startPos.x && pos.y == startPos.y) {
-    candidatePaths.push([...path]);
-    connectedDots.push(connectedDotsCount);
+    candidatePath = [...path];
     dotArr.unmark(pos);
-    return;
+    return true;
   }
 
   path.push(pos);
+  let dir = 0;
   for (let i = 0; i < 8; i++) {
-    next = nextPos(i, pos);
-    if (!next) continue;
+    dir = (backdir + 2 + i) % 8;
+    next = dotArr.nextPos(dir, pos);
     if (
       !dotArr.isMarked(next) &&
       dotArr.getColor(next) == color &&
-      !dotArr.isInside(next)
+      !dotArr.isInside(next) &&
+      recurcivePath(next, [...path], (dir + 4) % 8)
     ) {
-      recurcivePath(
-        next,
-        [...path],
-        dotArr.isConnected(pos) ? connectedDotsCount + 1 : connectedDotsCount
-      );
+      dotArr.unmark(pos);
+      return true;
     }
   }
   dotArr.unmark(pos);
-}
-
-function markDotsAsConnected(path) {
-  for (let pos of path) {
-    dotArr.connect(pos);
-  }
+  return false;
 }
 
 //IMPORTANT in this function, path is object with boundings and optimized path fields
