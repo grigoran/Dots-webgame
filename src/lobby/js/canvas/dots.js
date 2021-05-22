@@ -180,10 +180,9 @@ class Dots {
 function getFillColor(hex) {
   let opacity = 0.5;
   if (!hex) return "orange";
-  let rgb = hex
-    .match(/[a-f\d]{2}/gi)
-    .map((elem) => parseInt(elem, 16) * opacity)
-    .join(",");
+  let rgb = hex.match(/[a-f\d]{2}/gi);
+  if (!rgb) return "orange";
+  rgb = rgb.map((elem) => parseInt(elem, 16) * opacity).join(",");
   return `rgb(${rgb})`;
 }
 

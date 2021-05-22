@@ -14,8 +14,8 @@ let findPath = function (pos) {
   recurcivePath(startPos, [], 0);
   if (candidatePath.length > 3) {
     candidatePath = pathWorker.simplifyPath(candidatePath);
-    return candidatePath.path;
-  } else return [];
+    return candidatePath;
+  } else return { path: [] };
 };
 
 //pos-current dot pos, path-current path, backdir-dir to prev dot
@@ -52,12 +52,16 @@ function markDotsInsidePath(polygon) {
   let pos = new Vector();
   let color = dotArr.getColor(polygon.path[0]);
   let localPlayer = color == player.local.color;
-  for (let i = polygon.bounding.min.x; i < polygon.bounding.max.x; i++) {
-    for (let j = polygon.bounding.min.y; j < polygon.bounding.max.y; j++) {
+  for (let i = 0; i < polygon.source.length; i++) {
+    dotArr.mark(polygon.source[i]);
+  }
+  console.log(polygon.bounding);
+  for (let i = polygon.bounding.min.x; i <= polygon.bounding.max.x; i++) {
+    for (let j = polygon.bounding.min.y; j <= polygon.bounding.max.y; j++) {
       pos.x = i;
       pos.y = j;
       let nowColor = dotArr.getColor(pos);
-      if (dotArr.isConnected(pos) && nowColor == color) continue;
+      if (dotArr.isMarked(pos)) continue;
       if (pathWorker.isInsidePath(polygon.path, pos)) {
         if (nowColor != color && nowColor != "" && !dotArr.isInside(pos)) {
           localPlayer ? (player.local.score += 1) : (player.remote.score += 1);
@@ -67,6 +71,9 @@ function markDotsInsidePath(polygon) {
       }
     }
   }
+  for (let i = 0; i < polygon.source.length; i++) {
+    dotArr.unmark(polygon.source[i]);
+  }
 }
 
 let PathFinder = function () {
@@ -74,5 +81,6 @@ let PathFinder = function () {
     dotArr = arr;
   };
   this.findPath = findPath;
+  this.markInsideNodes = markDotsInsidePath;
 };
 export let pathFinder = new PathFinder();

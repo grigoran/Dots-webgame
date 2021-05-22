@@ -1,5 +1,5 @@
 import { Vector } from "./vector";
-//import { isInsidePath } from "./pathWorker.js";
+import { isInsidePath } from "./pathWorker.js";
 import { pathFinder } from "./pathFinder.js";
 let dotArr = {};
 
@@ -72,7 +72,7 @@ function checkConnection(pos, color) {
     if (!nextPos) continue;
     let nextId = dotArr.getGroup(nextPos);
     id = dotArr.getGroup(pos);
-    if (dotArr.getColor(nextPos) == color) {
+    if (!dotArr.isInside(nextPos) && dotArr.getColor(nextPos) == color) {
       if (id == -1) {
         groups.addToGroup(pos, nextId);
       } else if (id != nextId) {
@@ -90,7 +90,8 @@ function checkConnection(pos, color) {
 function getUnderDot(id, pos, ymax) {
   for (let i = pos.y; i <= ymax; i++) {
     let newPos = { x: pos.x, y: i };
-    if (dotArr.getGroup(newPos) == id) return newPos;
+    if (!dotArr.isInside(newPos) && dotArr.getGroup(newPos) == id)
+      return newPos;
   }
   return false;
 }
@@ -98,15 +99,18 @@ function getUnderDot(id, pos, ymax) {
 function findZones(id) {
   let bound = groups.getBounding(id);
   let color = groups.getColor(id);
-  for (let i = bound.begin.x; i < bound.end.x; i++) {
-    for (let j = bound.begin.y; j < bound.end.y; j++) {
+  for (let i = bound.begin.x + 1; i < bound.end.x; i++) {
+    for (let j = bound.begin.y + 1; j < bound.end.y; j++) {
       let nowPos = { x: i, y: j };
       let nowColor = dotArr.getColor(nowPos);
       if (nowColor != "" && nowColor != color && !dotArr.isInside(nowPos)) {
         let underPos = getUnderDot(id, nowPos, bound.end.y);
         if (!underPos) continue;
-        let path = pathFinder.findPath(underPos);
-        if (path.length > 0) return path;
+        let polygon = pathFinder.findPath(underPos);
+        if (polygon.path.length > 0 && isInsidePath(polygon.path, nowPos)) {
+          pathFinder.markInsideNodes(polygon);
+          return polygon.path;
+        }
       }
     }
   }

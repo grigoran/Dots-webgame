@@ -50,7 +50,10 @@ export class GameStage extends Stage {
         }
       }
     });
-    if (DEV_MODE) field.placeDotDirect({ x: 7, y: 7 }, "white");
+    if (DEV_MODE) {
+      field.placeDotDirect({ x: 8, y: 7 }, "orange");
+      field.placeDotDirect({ x: 6, y: 7 }, "orange");
+    }
   }
   update(deltaTime) {
     field.drawField();
