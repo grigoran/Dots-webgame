@@ -117,11 +117,31 @@ function findZones(id) {
   return [];
 }
 
+function getUnderDotOther(pos, color) {
+  let newPos = { x: pos.x, y: pos.y };
+  for (let i = pos.y + 1; i < dotArr.size.y; i++) {
+    newPos.y = i;
+    let newColor = dotArr.getColor(newPos);
+    if (newColor != color && newColor != "" && !dotArr.isInside(newPos)) {
+      return newPos;
+    }
+  }
+  return false;
+}
+
+function findInclusionToOtherZone(pos, color) {
+  let newPos = getUnderDotOther(pos, color);
+  if (!newPos) return [];
+  let id = dotArr.getGroup(newPos);
+  return findZones(id);
+}
+
 function addDot(pos) {
   let color = dotArr.getColor(pos);
   let id = checkConnection(pos, color); //check inclusion into the group
   let path = findZones(id, color);
-  return path;
+  if (path.length > 0) return path;
+  else return findInclusionToOtherZone(pos, color);
 }
 
 let DotGroups = function () {

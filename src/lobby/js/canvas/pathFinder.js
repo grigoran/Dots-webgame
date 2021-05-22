@@ -55,7 +55,6 @@ function markDotsInsidePath(polygon) {
   for (let i = 0; i < polygon.source.length; i++) {
     dotArr.mark(polygon.source[i]);
   }
-  console.log(polygon.bounding);
   for (let i = polygon.bounding.min.x; i <= polygon.bounding.max.x; i++) {
     for (let j = polygon.bounding.min.y; j <= polygon.bounding.max.y; j++) {
       pos.x = i;

@@ -44,6 +44,13 @@ function getNextPos(dir, pos) {
   return newPos;
 }
 
+function checkPos(pos, size) {
+  if (!pos || pos.x < 0 || pos.x >= size.x || pos.y < 0 || pos.y >= size.y) {
+    return false;
+  }
+  return true;
+}
+
 function DotArr(meshSize) {
   let arr = [];
   for (let i = 0; i < meshSize.x; i++) {
@@ -54,36 +61,47 @@ function DotArr(meshSize) {
   }
   this.size = meshSize;
   this.getColor = function (pos) {
+    if (!checkPos(pos, this.size)) return "";
     return arr[pos.x][pos.y].color;
   };
   this.setColor = function (pos, color) {
+    if (!checkPos(pos, this.size)) return;
     arr[pos.x][pos.y].color = color;
   };
   this.connect = function (pos) {
+    if (!checkPos(pos, this.size)) return;
     arr[pos.x][pos.y].connected = true;
   };
   this.isConnected = function (pos) {
+    if (!checkPos(pos, this.size)) return false;
     return arr[pos.x][pos.y].connected;
   };
   this.markInside = function (pos) {
+    if (!checkPos(pos, this.size)) return;
     arr[pos.x][pos.y].inside = true;
   };
   this.isInside = function (pos) {
+    if (!checkPos(pos, this.size)) return false;
     return arr[pos.x][pos.y].inside;
   };
   this.mark = function (pos) {
+    if (!checkPos(pos, this.size)) return;
     arr[pos.x][pos.y].marked = true;
   };
   this.unmark = function (pos) {
+    if (!checkPos(pos, this.size)) return;
     arr[pos.x][pos.y].marked = false;
   };
   this.isMarked = function (pos) {
+    if (!checkPos(pos, this.size)) return false;
     return arr[pos.x][pos.y].marked;
   };
   this.setGroup = function (pos, id) {
+    if (!checkPos(pos, this.size)) return;
     arr[pos.x][pos.y].group = id;
   };
   this.getGroup = function (pos) {
+    if (!checkPos(pos, this.size)) -1;
     return arr[pos.x][pos.y].group;
   };
   this.nextPos = (dir, pos) => {
